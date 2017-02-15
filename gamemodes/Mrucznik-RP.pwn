@@ -23,6 +23,23 @@
 //-------------------------------------------<[ Includy ]>---------------------------------------------------//
 //-                                                                                                         -//
 #include <a_samp>
+#include <fixes>
+//-------<[ Pluginy ]>-------
+#include <crashdetect>					// By Zeex, v4.18.1				https://github.com/Zeex/samp-plugin-crashdetect/releases
+#include <libRegEx>						// By Koala818 v0.2				http://forum.sa-mp.com/showthread.php?t=526725 https://github.com/FF-Koala/Regular-Expressions-Plugin
+#include <a_mysql>						// By BlueG, R41-2:				http://forum.sa-mp.com/showthread.php?t=56564 https://github.com/pBlueG/SA-MP-MySQL/releases
+//--------<[ YSI ]>----------
+#include <YSI\y_master>
+#include <YSI\y_iterate>
+#include <YSI\y_commands>
+#include <YSI\y_dialog>
+#include <YSI\y_groups>
+#include <YSI\y_ini>
+#include <My_YSI\y_safereturn>			// By Bartekdvd & Y_Less: 		http://forum.sa-mp.com/showthread.php?t=456132
+//-------<[ Pluginy ]>-------
+#include <sscanf2>						// By Y_Less, 2.8.2:			http://forum.sa-mp.com/showthread.php?t=570927
+#include <streamer>						// By Incognito, v2.8.2:		http://forum.sa-mp.com/showthread.php?t=102865
+
 
 //------------------------------------------<[ Ustawienia ]>-------------------------------------------------//
 //-                                                                                                         -//
@@ -30,15 +47,62 @@
 #define MINOR		6
 #define RELEASE		0
 #define VERSION "v" #MAJOR "." #MINOR "." #RELEASE
+#define COMPILED_IN "15.02.2017"
+#define DEBUG_MODE 1
+#if DEBUG_MODE==1
+	#warning DEBUG_MODE_ON!
+#endif
+
+#define STREAM_DISTANCE 300.0
+
+//----------------------------------------<[ Moje Callbacki ]>-----------------------------------------------//
+//-                                                                                                         -//
+forward OnPlayerRegister(playerid);
+forward OnPlayerLogin(playerid);
 
 //--------------------------------<[ Wewnêtrzbe systemy oraz modu³y ]>---------------------------------------//
+//-                                                                                                         -//
+
+//----< System - preprocesor, zmienne >----
+#include "system\define.pwn"
+#include "system\kolory.pwn"
+#include "system\zmienne.pwn"
+
+//----< Modu³y - preprocesor >----
+#include "modules\mru_mysql\mru_mysql.def"
+#include "modules\logi\logi.def"
+#include "modules\chaty\chaty.def"
+#include "modules\keybindy\keybindy.def"
+#include "modules\debug\debug.def"
+
+//----< Modu³y - zmienne >----
+#include "modules\mru_mysql\mru_mysql.hwn"
+#include "modules\logi\logi.hwn"
+#include "modules\chaty\chaty.hwn"
+#include "modules\keybindy\keybindy.hwn"
+#include "modules\debug\debug.hwn"
+
+//----< Modu³y - funkcje >----
+#include "modules\mru_mysql\mru_mysql.pwn"
+#include "modules\logi\logi.pwn"
+#include "modules\chaty\chaty.pwn"
+#include "modules\keybindy\keybindy.pwn"
+#include "modules\debug\debug.pwn"
+
+//----< System - funkcje >----
+#include "system\funkcje.pwn"
+#include "system\timery.pwn"
+
+
+
+//--------------------------------------------<[ Main ]>-----------------------------------------------------//
 //-                                                                                                         -//
 main()
 {
 	print("\n----------------------------------");
 	print("M | --- Mrucznik Role Play --- | M");
 	print("R | ---        ****        --- | R");
-	print("U | ---        v3.0        --- | U");
+	print("U | ---        v"#MAJOR"."#MINOR"        --- | U");
 	print("C | ---        ****        --- | C");
 	print("Z | ---    by Mrucznik     --- | Z");
 	print("N | ---                    --- | N");
@@ -88,10 +152,11 @@ public OnGameModeInit()
 {
 	print("<<< Wykonywanie OnGameModeInit...");
 	
+	//Ustawienia gamemodu:
 	SetGameModeText("Mrucznik-RP "VERSION);
 	SetMapNameText("Los Santos + Miasteczka");
-	SetGameModeText("Mrucznik-RP "VERSION);
-	SetMapNameText("Los Santos + Miasteczka");
+	SendRconCommand("stream_distance "#STREAM_DISTANCE_S);
+	regex_syntax(SYNTAX_PERL);
 	
 	//Ustawienia rozgrywki:
 	AllowInteriorWeapons(1); //broñ w intkach
@@ -105,8 +170,20 @@ public OnGameModeInit()
 		// - off (broñ trzymana w obu rêkach jest trzymana jedn¹, skiny chodz¹ swoim chodem)
 		// - on  (broñ trzymana jest normalnie, wszystkie skiny chodz¹ jak CJ)
 	
-	//£adowanie modu³ów:
-	//Modu³y:
+	//£¹czenie z mysql:
+	MruMySQL_Connect();
+	
+	//Uruchamianie timerów:
+	timery_Init();
+	
+	//Inicjowanie iteratorów:
+	Iter_Init(StreamedPlayers);
+	
+	//Tworzenie grup:
+	LoggedPlayer = Group_Create("loggedplayers");
+	
+	
+	//-----< £adowanie modu³ów: >------
 	print("    <<< Ladowanie modulow...");
 	
 	print("    >>> Pomyslnie zaladowano wszystkie moduly...");
@@ -118,6 +195,10 @@ public OnGameModeInit()
 public OnGameModeExit()
 {
     print("<<< Wykonywanie OnGameModeExit...");
+	
+	timery_Delete();
+	
+	MruMySQL_Exit();
 	
     print(">>> Wykonano. Gamemode pomyslnie wylaczony.");
 	return 1;
@@ -136,6 +217,9 @@ public OnPlayerConnect(playerid)
 
 public OnPlayerDisconnect(playerid, reason)
 {
+
+	//Iteratory:
+	Iter_Clear(StreamedPlayers[playerid]); //czyszczenie pêtli streamed players (widocznych graczy dla gracza)
 	return 1;
 }
 
@@ -162,7 +246,7 @@ public OnVehicleDeath(vehicleid, killerid)
 
 public OnPlayerText(playerid, text[])
 {
-	
+	Chat(playerid, ChatICAdditions(playerid, text));
 	return 0;
 }
 
@@ -268,11 +352,15 @@ public OnRconLoginAttempt(ip[], password[], success)
 
 public OnPlayerStreamIn(playerid, forplayerid)
 {
+	if( IsPlayerLogged(playerid) )
+		Iter_Add(StreamedPlayers[forplayerid], playerid);
 	return 1;
 }
 
 public OnPlayerStreamOut(playerid, forplayerid)
 {
+	if( IsPlayerLogged(playerid) )
+		Iter_Remove(StreamedPlayers[forplayerid], playerid);
 	return 1;
 }
 
@@ -298,5 +386,56 @@ public OnPlayerClickPlayer(playerid, clickedplayerid, source)
 
 public OnPlayerUpdate(playerid)
 {
+	return 1;
+}
+
+//-----------------------------------------------------------------------------------------------------------//
+//-----------------------------------------[Callback'i z Bibliotek]------------------------------------------//
+//----------------------------------------------------|------------------------------------------------------//
+//----------------------------------------------------|------------------------------------------------------//
+//---------------------------------------------------\ /-----------------------------------------------------//
+//----------------------------------------------------*------------------------------------------------------//
+//-----------------------------------------------------------------------------------------------------------//
+/*
+        Error & Return type
+
+    COMMAND_ZERO_RET      = 0 , // The command returned 0.
+    COMMAND_OK            = 1 , // Called corectly.
+    COMMAND_UNDEFINED     = 2 , // Command doesn't exist.
+    COMMAND_DENIED        = 3 , // Can't use the command.
+    COMMAND_HIDDEN        = 4 , // Can't use the command don't let them know it exists.
+    COMMAND_NO_PLAYER     = 6 , // Used by a player who shouldn't exist.
+    COMMAND_DISABLED      = 7 , // All commands are disabled for this player.
+    COMMAND_BAD_PREFIX    = 8 , // Used "/" instead of "#", or something similar.
+    COMMAND_INVALID_INPUT = 10, // Didn't type "/something".
+*/ 
+public e_COMMAND_ERRORS:OnPlayerCommandPerformed(playerid, cmdtext[], e_COMMAND_ERRORS:success)
+{
+    switch (success)
+    {
+        case COMMAND_UNDEFINED:
+        {
+             // Your code here.
+        }
+    }
+    return COMMAND_OK;
+}
+
+//-----------------------------------------------------------------------------------------------------------//
+//---------------------------------------------[Moje Callbacki]----------------------------------------------//
+//----------------------------------------------------|------------------------------------------------------//
+//----------------------------------------------------|------------------------------------------------------//
+//---------------------------------------------------\ /-----------------------------------------------------//
+//----------------------------------------------------*------------------------------------------------------//
+//-----------------------------------------------------------------------------------------------------------//
+public OnPlayerRegister(playerid)
+{
+	
+	return 1;
+}
+
+public OnPlayerLogin(playerid)
+{
+	Group_SetPlayer(LoggedPlayer, playerid, true);
 	return 1;
 }

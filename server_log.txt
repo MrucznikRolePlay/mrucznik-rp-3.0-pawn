@@ -1,0 +1,667 @@
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[15:26:39] Unable to exec file 'server.cfg'.
+[15:26:39] Error: Your password must be changed from the default password, please change it.
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[15:27:58] filterscripts = ""  (string)
+[15:27:58] 
+[15:27:58] Server Plugins
+[15:27:58] --------------
+[15:27:58]  Loading plugin: crashdetect
+[15:27:58]   CrashDetect v4.18.1 is OK.
+[15:27:58]   Loaded.
+[15:27:58]  Loading plugin: streamer
+[15:27:58] 
+
+*** Streamer Plugin v2.8.2 by Incognito loaded ***
+
+[15:27:58]   Loaded.
+[15:27:58]  Loading plugin: sscanf
+[15:27:58]   Failed.
+[15:27:58]  Loading plugin: mysql
+[15:27:58]  >> plugin.mysql: R41-2 successfully loaded.
+[15:27:58]   Loaded.
+[15:27:58]  Loading plugin: libRegEx
+[15:27:58]   Failed.
+[15:27:58]  Loaded 3 plugins.
+
+[15:27:58] 
+[15:27:58] Filterscripts
+[15:27:58] ---------------
+[15:27:58]   Loaded 0 filterscripts.
+
+[15:27:58] [debug] Run time error 19: "File or function is not found"
+[15:27:58] [debug]  SSCANF_Init
+[15:27:58] [debug]  SSCANF_IsConnected
+[15:27:58] [debug]  SSCANF_Join
+[15:27:58] [debug]  SSCANF_Leave
+[15:27:58] [debug] Run time error 19: "File or function is not found"
+[15:27:58] [debug]  SSCANF_Init
+[15:27:58] [debug]  SSCANF_IsConnected
+[15:27:58] [debug]  SSCANF_Join
+[15:27:58] [debug]  SSCANF_Leave
+[15:27:58] Script[gamemodes/Mrucznik-RP.amx]: Run time error 19: "File or function is not found"
+[15:27:58] Number of vehicle models: 0
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[15:28:25] filterscripts = ""  (string)
+[15:28:25] 
+[15:28:25] Server Plugins
+[15:28:25] --------------
+[15:28:25]  Loading plugin: crashdetect
+[15:28:25]   CrashDetect v4.18.1 is OK.
+[15:28:25]   Loaded.
+[15:28:25]  Loading plugin: streamer
+[15:28:25] 
+
+*** Streamer Plugin v2.8.2 by Incognito loaded ***
+
+[15:28:25]   Loaded.
+[15:28:25]  Loading plugin: sscanf
+[15:28:25] 
+
+[15:28:25]  ===============================
+
+[15:28:25]       sscanf plugin loaded.     
+
+[15:28:25]          Version:  2.8.1        
+
+[15:28:25]    (c) 2012 Alex "Y_Less" Cole  
+
+[15:28:25]  ===============================
+
+[15:28:25]   Loaded.
+[15:28:25]  Loading plugin: mysql
+[15:28:25]  >> plugin.mysql: R41-2 successfully loaded.
+[15:28:25]   Loaded.
+[15:28:25]  Loading plugin: libRegEx
+[15:28:25]   Failed.
+[15:28:25]  Loaded 4 plugins.
+
+[15:28:25] 
+[15:28:25] Filterscripts
+[15:28:25] ---------------
+[15:28:25]   Loaded 0 filterscripts.
+
+[15:28:25]  
+[15:28:25]  
+[15:28:25]  
+[15:28:25]  ======================================= 
+[15:28:25]  |                                     | 
+[15:28:25]  |        YSI version 4.00.0001        | 
+[15:28:25]  |        By Alex "Y_Less" Cole        | 
+[15:28:25]  |                                     | 
+[15:28:25]  ======================================= 
+[15:28:25]  
+[15:28:25] <<< Wykonywanie OnGameModeInit...
+[15:28:25]     <<< Ladowanie modulow...
+[15:28:25]     >>> Pomyslnie zaladowano wszystkie moduly...
+[15:28:25] >>> Wykonano. Gamemode pomyslnie uruchomiony.
+
+[15:28:25] 
+----------------------------------
+[15:28:25] M | --- Mrucznik Role Play --- | M
+[15:28:25] R | ---        ****        --- | R
+[15:28:25] U | ---        v2.6        --- | U
+[15:28:25] C | ---        ****        --- | C
+[15:28:25] Z | ---    by Mrucznik     --- | Z
+[15:28:25] N | ---                    --- | N
+[15:28:25] I | ---       /\_/\        --- | I
+[15:28:25] K | ---   ===( *.* )===    --- | K
+[15:28:25]   | ---       \_^_/        --- |  
+[15:28:25] R | ---         |          --- | R
+[15:28:25] P | ---         O          --- | P
+[15:28:25] ----------------------------------
+
+[15:28:25] WERSJA: v2.6.0 SKOMPILOWANO: COMPILED_IN
+[15:28:25] DEBUG MODE: NORMAL
+[15:28:25] 
+
+[15:28:25] 251723648
+[15:28:25] Number of vehicle models: 0
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[15:28:41] filterscripts = ""  (string)
+[15:28:41] 
+[15:28:41] Server Plugins
+[15:28:41] --------------
+[15:28:41]  Loading plugin: crashdetect
+[15:28:41]   CrashDetect v4.18.1 is OK.
+[15:28:41]   Loaded.
+[15:28:41]  Loading plugin: streamer
+[15:28:41] 
+
+*** Streamer Plugin v2.8.2 by Incognito loaded ***
+
+[15:28:41]   Loaded.
+[15:28:41]  Loading plugin: sscanf
+[15:28:41] 
+
+[15:28:41]  ===============================
+
+[15:28:41]       sscanf plugin loaded.     
+
+[15:28:41]          Version:  2.8.1        
+
+[15:28:41]    (c) 2012 Alex "Y_Less" Cole  
+
+[15:28:41]  ===============================
+
+[15:28:41]   Loaded.
+[15:28:41]  Loading plugin: mysql
+[15:28:41]  >> plugin.mysql: R41-2 successfully loaded.
+[15:28:41]   Loaded.
+[15:28:41]  Loading plugin: libRegEx
+[15:28:41]   Failed.
+[15:28:41]  Loaded 4 plugins.
+
+[15:28:41] 
+[15:28:41] Filterscripts
+[15:28:41] ---------------
+[15:28:41]   Loaded 0 filterscripts.
+
+[15:28:41]  
+[15:28:41]  
+[15:28:41]  
+[15:28:41]  ======================================= 
+[15:28:41]  |                                     | 
+[15:28:41]  |        YSI version 4.00.0001        | 
+[15:28:41]  |        By Alex "Y_Less" Cole        | 
+[15:28:41]  |                                     | 
+[15:28:41]  ======================================= 
+[15:28:41]  
+[15:28:41] <<< Wykonywanie OnGameModeInit...
+[15:28:41]     <<< Ladowanie modulow...
+[15:28:41]     >>> Pomyslnie zaladowano wszystkie moduly...
+[15:28:41] >>> Wykonano. Gamemode pomyslnie uruchomiony.
+
+[15:28:41] 
+----------------------------------
+[15:28:41] M | --- Mrucznik Role Play --- | M
+[15:28:41] R | ---        ****        --- | R
+[15:28:41] U | ---        v2.6        --- | U
+[15:28:41] C | ---        ****        --- | C
+[15:28:41] Z | ---    by Mrucznik     --- | Z
+[15:28:41] N | ---                    --- | N
+[15:28:41] I | ---       /\_/\        --- | I
+[15:28:41] K | ---   ===( *.* )===    --- | K
+[15:28:41]   | ---       \_^_/        --- |  
+[15:28:41] R | ---         |          --- | R
+[15:28:41] P | ---         O          --- | P
+[15:28:41] ----------------------------------
+
+[15:28:41] WERSJA: v2.6.0 SKOMPILOWANO: COMPILED_IN
+[15:28:41] DEBUG MODE: NORMAL
+[15:28:41] 
+
+[15:28:41] F00FF80
+[15:28:41] Number of vehicle models: 0
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[15:31:31] filterscripts = ""  (string)
+[15:31:31] 
+[15:31:31] Server Plugins
+[15:31:31] --------------
+[15:31:31]  Loading plugin: crashdetect
+[15:31:31]   CrashDetect v4.18.1 is OK.
+[15:31:31]   Loaded.
+[15:31:31]  Loading plugin: streamer
+[15:31:31] 
+
+*** Streamer Plugin v2.8.2 by Incognito loaded ***
+
+[15:31:31]   Loaded.
+[15:31:31]  Loading plugin: sscanf
+[15:31:31] 
+
+[15:31:31]  ===============================
+
+[15:31:31]       sscanf plugin loaded.     
+
+[15:31:31]          Version:  2.8.1        
+
+[15:31:31]    (c) 2012 Alex "Y_Less" Cole  
+
+[15:31:31]  ===============================
+
+[15:31:31]   Loaded.
+[15:31:31]  Loading plugin: mysql
+[15:31:31]  >> plugin.mysql: R41-2 successfully loaded.
+[15:31:31]   Loaded.
+[15:31:31]  Loading plugin: libRegEx
+[15:31:31]   Failed.
+[15:31:31]  Loaded 4 plugins.
+
+[15:31:31] 
+[15:31:31] Filterscripts
+[15:31:31] ---------------
+[15:31:31]   Loaded 0 filterscripts.
+
+[15:31:31]  
+[15:31:31]  
+[15:31:31]  
+[15:31:31]  ======================================= 
+[15:31:31]  |                                     | 
+[15:31:31]  |        YSI version 4.00.0001        | 
+[15:31:31]  |        By Alex "Y_Less" Cole        | 
+[15:31:31]  |                                     | 
+[15:31:31]  ======================================= 
+[15:31:31]  
+[15:31:31] <<< Wykonywanie OnGameModeInit...
+[15:31:31]     <<< Ladowanie modulow...
+[15:31:31]     >>> Pomyslnie zaladowano wszystkie moduly...
+[15:31:31] >>> Wykonano. Gamemode pomyslnie uruchomiony.
+
+[15:31:31] 
+----------------------------------
+[15:31:31] M | --- Mrucznik Role Play --- | M
+[15:31:31] R | ---        ****        --- | R
+[15:31:31] U | ---        v2.6        --- | U
+[15:31:31] C | ---        ****        --- | C
+[15:31:31] Z | ---    by Mrucznik     --- | Z
+[15:31:31] N | ---                    --- | N
+[15:31:31] I | ---       /\_/\        --- | I
+[15:31:31] K | ---   ===( *.* )===    --- | K
+[15:31:31]   | ---       \_^_/        --- |  
+[15:31:31] R | ---         |          --- | R
+[15:31:31] P | ---         O          --- | P
+[15:31:31] ----------------------------------
+
+[15:31:31] WERSJA: v2.6.0 SKOMPILOWANO: COMPILED_IN
+[15:31:31] DEBUG MODE: NORMAL
+[15:31:31] 
+
+[15:31:31] 808080
+[15:31:31] Number of vehicle models: 0
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[15:32:34] filterscripts = ""  (string)
+[15:32:34] 
+[15:32:34] Server Plugins
+[15:32:34] --------------
+[15:32:34]  Loading plugin: crashdetect
+[15:32:34]   CrashDetect v4.18.1 is OK.
+[15:32:34]   Loaded.
+[15:32:34]  Loading plugin: streamer
+[15:32:34] 
+
+*** Streamer Plugin v2.8.2 by Incognito loaded ***
+
+[15:32:34]   Loaded.
+[15:32:34]  Loading plugin: sscanf
+[15:32:34] 
+
+[15:32:34]  ===============================
+
+[15:32:34]       sscanf plugin loaded.     
+
+[15:32:34]          Version:  2.8.1        
+
+[15:32:34]    (c) 2012 Alex "Y_Less" Cole  
+
+[15:32:34]  ===============================
+
+[15:32:34]   Loaded.
+[15:32:34]  Loading plugin: mysql
+[15:32:34]  >> plugin.mysql: R41-2 successfully loaded.
+[15:32:34]   Loaded.
+[15:32:34]  Loading plugin: libRegEx
+[15:32:34]   Failed.
+[15:32:34]  Loaded 4 plugins.
+
+[15:32:34] I couldn't load any gamemode scripts. Please verify your server.cfg
+[15:32:34] It needs a gamemode0 line at the very least.
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[15:32:50] filterscripts = ""  (string)
+[15:32:50] 
+[15:32:50] Server Plugins
+[15:32:50] --------------
+[15:32:50]  Loading plugin: crashdetect
+[15:32:50]   CrashDetect v4.18.1 is OK.
+[15:32:50]   Loaded.
+[15:32:50]  Loading plugin: streamer
+[15:32:50] 
+
+*** Streamer Plugin v2.8.2 by Incognito loaded ***
+
+[15:32:50]   Loaded.
+[15:32:50]  Loading plugin: sscanf
+[15:32:50] 
+
+[15:32:50]  ===============================
+
+[15:32:50]       sscanf plugin loaded.     
+
+[15:32:50]          Version:  2.8.1        
+
+[15:32:50]    (c) 2012 Alex "Y_Less" Cole  
+
+[15:32:50]  ===============================
+
+[15:32:50]   Loaded.
+[15:32:50]  Loading plugin: mysql
+[15:32:50]  >> plugin.mysql: R41-2 successfully loaded.
+[15:32:50]   Loaded.
+[15:32:50]  Loading plugin: libRegEx
+[15:32:50]   Failed.
+[15:32:50]  Loaded 4 plugins.
+
+[15:32:50] 
+[15:32:50] Filterscripts
+[15:32:50] ---------------
+[15:32:50]   Loaded 0 filterscripts.
+
+[15:32:50]  
+[15:32:50]  
+[15:32:50]  
+[15:32:50]  ======================================= 
+[15:32:50]  |                                     | 
+[15:32:50]  |        YSI version 4.00.0001        | 
+[15:32:50]  |        By Alex "Y_Less" Cole        | 
+[15:32:50]  |                                     | 
+[15:32:50]  ======================================= 
+[15:32:50]  
+[15:32:50] <<< Wykonywanie OnGameModeInit...
+[15:32:50]     <<< Ladowanie modulow...
+[15:32:50]     >>> Pomyslnie zaladowano wszystkie moduly...
+[15:32:50] >>> Wykonano. Gamemode pomyslnie uruchomiony.
+
+[15:32:50] 
+----------------------------------
+[15:32:50] M | --- Mrucznik Role Play --- | M
+[15:32:50] R | ---        ****        --- | R
+[15:32:50] U | ---        v2.6        --- | U
+[15:32:50] C | ---        ****        --- | C
+[15:32:50] Z | ---    by Mrucznik     --- | Z
+[15:32:50] N | ---                    --- | N
+[15:32:50] I | ---       /\_/\        --- | I
+[15:32:50] K | ---   ===( *.* )===    --- | K
+[15:32:50]   | ---       \_^_/        --- |  
+[15:32:50] R | ---         |          --- | R
+[15:32:50] P | ---         O          --- | P
+[15:32:50] ----------------------------------
+
+[15:32:50] WERSJA: v2.6.0 SKOMPILOWANO: COMPILED_IN
+[15:32:50] DEBUG MODE: NORMAL
+[15:32:50] 
+
+[15:32:50] F00FF00
+[15:32:50] E09F709
+[15:32:50] D11EE11
+[15:32:50] C1AE61A
+[15:32:50] B22DD22
+[15:32:50] A2BD52B
+[15:32:50] 933CC33
+[15:32:50] 83CC43C
+[15:32:50] 744BB44
+[15:32:50] 64DB34D
+[15:32:50] 555AA55
+[15:32:50] 45EA25E
+[15:32:50] 3669966
+[15:32:50] 26F916F
+[15:32:50] 1778877
+[15:32:50] 808080
+[15:32:50] FE887788
+[15:32:50] FD916F91
+[15:32:50] FC996699
+[15:32:50] FBA25EA2
+[15:32:50] FAAA55AA
+[15:32:50] F9B34DB3
+[15:32:50] F8BB44BB
+[15:32:50] F7C43CC4
+[15:32:50] F6CC33CC
+[15:32:50] F5D52BD5
+[15:32:50] F4DD22DD
+[15:32:50] F3E61AE6
+[15:32:50] F2EE11EE
+[15:32:50] F1F709F7
+[15:32:50] F0FF00FF
+[15:32:50] Number of vehicle models: 0
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[15:34:57] filterscripts = ""  (string)
+[15:34:57] 
+[15:34:57] Server Plugins
+[15:34:57] --------------
+[15:34:57]  Loading plugin: crashdetect
+[15:34:57]   CrashDetect v4.18.1 is OK.
+[15:34:57]   Loaded.
+[15:34:57]  Loading plugin: streamer
+[15:34:57] 
+
+*** Streamer Plugin v2.8.2 by Incognito loaded ***
+
+[15:34:57]   Loaded.
+[15:34:57]  Loading plugin: sscanf
+[15:34:57] 
+
+[15:34:57]  ===============================
+
+[15:34:57]       sscanf plugin loaded.     
+
+[15:34:57]          Version:  2.8.1        
+
+[15:34:57]    (c) 2012 Alex "Y_Less" Cole  
+
+[15:34:57]  ===============================
+
+[15:34:57]   Loaded.
+[15:34:57]  Loading plugin: mysql
+[15:34:57]  >> plugin.mysql: R41-2 successfully loaded.
+[15:34:57]   Loaded.
+[15:34:57]  Loading plugin: libRegEx
+[15:34:57]   Failed.
+[15:34:57]  Loaded 4 plugins.
+
+[15:34:57] 
+[15:34:57] Filterscripts
+[15:34:57] ---------------
+[15:34:57]   Loaded 0 filterscripts.
+
+[15:34:57]  
+[15:34:57]  
+[15:34:57]  
+[15:34:57]  ======================================= 
+[15:34:57]  |                                     | 
+[15:34:57]  |        YSI version 4.00.0001        | 
+[15:34:57]  |        By Alex "Y_Less" Cole        | 
+[15:34:57]  |                                     | 
+[15:34:57]  ======================================= 
+[15:34:57]  
+[15:34:57] <<< Wykonywanie OnGameModeInit...
+[15:34:57]     <<< Ladowanie modulow...
+[15:34:57]     >>> Pomyslnie zaladowano wszystkie moduly...
+[15:34:57] >>> Wykonano. Gamemode pomyslnie uruchomiony.
+
+[15:34:57] 
+----------------------------------
+[15:34:57] M | --- Mrucznik Role Play --- | M
+[15:34:57] R | ---        ****        --- | R
+[15:34:57] U | ---        v2.6        --- | U
+[15:34:57] C | ---        ****        --- | C
+[15:34:57] Z | ---    by Mrucznik     --- | Z
+[15:34:57] N | ---                    --- | N
+[15:34:57] I | ---       /\_/\        --- | I
+[15:34:57] K | ---   ===( *.* )===    --- | K
+[15:34:57]   | ---       \_^_/        --- |  
+[15:34:57] R | ---         |          --- | R
+[15:34:57] P | ---         O          --- | P
+[15:34:57] ----------------------------------
+
+[15:34:57] WERSJA: v2.6.0 SKOMPILOWANO: COMPILED_IN
+[15:34:57] DEBUG MODE: NORMAL
+[15:34:57] 
+
+[15:34:57] F00FF00
+[15:34:57] E09F709
+[15:34:57] D11EE11
+[15:34:57] C1AE61A
+[15:34:57] B22DD22
+[15:34:57] A2BD52B
+[15:34:57] 933CC33
+[15:34:57] 83CC43C
+[15:34:57] 744BB44
+[15:34:57] 64DB34D
+[15:34:57] 555AA55
+[15:34:57] 45EA25E
+[15:34:57] 3669966
+[15:34:57] 26F916F
+[15:34:57] 1778877
+[15:34:57] 808080
+[15:34:57] FE887788
+[15:34:57] FD916F91
+[15:34:57] FC996699
+[15:34:57] FBA25EA2
+[15:34:57] FAAA55AA
+[15:34:57] F9B34DB3
+[15:34:57] F8BB44BB
+[15:34:57] F7C43CC4
+[15:34:57] F6CC33CC
+[15:34:57] F5D52BD5
+[15:34:57] F4DD22DD
+[15:34:57] F3E61AE6
+[15:34:57] F2EE11EE
+[15:34:57] F1F709F7
+[15:34:57] F0FF00FF
+[15:34:57] Number of vehicle models: 0
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[15:35:18] filterscripts = ""  (string)
+[15:35:18] 
+[15:35:18] Server Plugins
+[15:35:18] --------------
+[15:35:18]  Loading plugin: crashdetect
+[15:35:18]   CrashDetect v4.18.1 is OK.
+[15:35:18]   Loaded.
+[15:35:18]  Loading plugin: streamer
+[15:35:18] 
+
+*** Streamer Plugin v2.8.2 by Incognito loaded ***
+
+[15:35:18]   Loaded.
+[15:35:18]  Loading plugin: sscanf
+[15:35:18] 
+
+[15:35:18]  ===============================
+
+[15:35:18]       sscanf plugin loaded.     
+
+[15:35:18]          Version:  2.8.1        
+
+[15:35:18]    (c) 2012 Alex "Y_Less" Cole  
+
+[15:35:18]  ===============================
+
+[15:35:18]   Loaded.
+[15:35:18]  Loading plugin: mysql
+[15:35:18]  >> plugin.mysql: R41-2 successfully loaded.
+[15:35:18]   Loaded.
+[15:35:18]  Loading plugin: libRegEx
+[15:35:18]   Failed.
+[15:35:18]  Loaded 4 plugins.
+
+[15:35:18] 
+[15:35:18] Filterscripts
+[15:35:18] ---------------
+[15:35:18]   Loaded 0 filterscripts.
+
+[15:35:18]  
+[15:35:18]  
+[15:35:18]  
+[15:35:18]  ======================================= 
+[15:35:18]  |                                     | 
+[15:35:18]  |        YSI version 4.00.0001        | 
+[15:35:18]  |        By Alex "Y_Less" Cole        | 
+[15:35:18]  |                                     | 
+[15:35:18]  ======================================= 
+[15:35:18]  
+[15:35:19] <<< Wykonywanie OnGameModeInit...
+[15:35:19]     <<< Ladowanie modulow...
+[15:35:19]     >>> Pomyslnie zaladowano wszystkie moduly...
+[15:35:19] >>> Wykonano. Gamemode pomyslnie uruchomiony.
+
+[15:35:19] 
+----------------------------------
+[15:35:19] M | --- Mrucznik Role Play --- | M
+[15:35:19] R | ---        ****        --- | R
+[15:35:19] U | ---        v2.6        --- | U
+[15:35:19] C | ---        ****        --- | C
+[15:35:19] Z | ---    by Mrucznik     --- | Z
+[15:35:19] N | ---                    --- | N
+[15:35:19] I | ---       /\_/\        --- | I
+[15:35:19] K | ---   ===( *.* )===    --- | K
+[15:35:19]   | ---       \_^_/        --- |  
+[15:35:19] R | ---         |          --- | R
+[15:35:19] P | ---         O          --- | P
+[15:35:19] ----------------------------------
+
+[15:35:19] WERSJA: v2.6.0 SKOMPILOWANO: 15.02.2017
+[15:35:19] DEBUG MODE: NORMAL
+[15:35:19] 
+
+[15:35:19] Number of vehicle models: 0
