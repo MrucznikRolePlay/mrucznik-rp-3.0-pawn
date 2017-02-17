@@ -29,6 +29,7 @@
 
 //
 
+//-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
 stock Error(const module[], const function[], const info[], playerid=-1)
 {
@@ -63,8 +64,12 @@ stock Error(const module[], const function[], const info[], playerid=-1)
 	return 1;
 }
 
+stock Debug_LoadNPCs()
+{
+	ConnectNPC("Tester","testbot");
+}
+
 //------------------<[ MySQL: ]>--------------------
 //-----------------<[ Komendy: ]>-------------------
-
 
 //end

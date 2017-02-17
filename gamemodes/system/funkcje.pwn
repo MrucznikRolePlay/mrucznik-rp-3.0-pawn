@@ -97,10 +97,10 @@ stock linear_interpolate(start, end, steps, count)
 stock GenerateGradient(colorMin, colorMax, range, value)
 {
 	new minR, minG, minB, minA, maxR, maxG, maxB, maxA, resultR, resultG, resultB, resultA;
-	minR = ((colorMin & 0xFF000000) >> 24);
-	minG = ((colorMin & 0x00FF0000) >> 16);
-	minB = ((colorMin & 0x0000FF00) >> 8);
-	minA = (colorMin & 0x000000FF);
+	minR = (colorMin >> 24) & 0xFF;
+	minG = (colorMin >> 16) & 0xFF;
+	minB = (colorMin >> 8) & 0xFF;
+	minA = colorMin & 0xFF;
 
 	maxR = ((colorMax & 0xFF000000) >> 24);
 	maxG = ((colorMax & 0x00FF0000) >> 16);
@@ -112,11 +112,10 @@ stock GenerateGradient(colorMin, colorMax, range, value)
 	resultB = linear_interpolate(minB, maxB, range, value);
 	resultA = linear_interpolate(minA, maxA, range, value);
 	
-	
 	resultR = resultR << 24;
 	resultG = resultG << 16;
 	resultB = resultB << 8;
-	return resultR+resultG+resultB+resultA;
+	return resultR | resultG | resultB | resultA;
 }
 
 //----------------------------------[Konwertowanie:]-----------------------------------

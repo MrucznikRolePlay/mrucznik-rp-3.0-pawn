@@ -26,18 +26,18 @@
 #include <fixes>
 //-------<[ Pluginy ]>-------
 #include <crashdetect>					// By Zeex, v4.18.1				https://github.com/Zeex/samp-plugin-crashdetect/releases
-#include <libRegEx>						// By Koala818 v0.2				http://forum.sa-mp.com/showthread.php?t=526725 https://github.com/FF-Koala/Regular-Expressions-Plugin
 #include <a_mysql>						// By BlueG, R41-2:				http://forum.sa-mp.com/showthread.php?t=56564 https://github.com/pBlueG/SA-MP-MySQL/releases
+#include <sscanf2>						// By Y_Less, 2.8.2:			http://forum.sa-mp.com/showthread.php?t=570927
 //--------<[ YSI ]>----------
-#include <YSI\y_master>
 #include <YSI\y_iterate>
 #include <YSI\y_commands>
 #include <YSI\y_dialog>
 #include <YSI\y_groups>
 #include <YSI\y_ini>
+#include <YSI\y_timers>
+#include <YSI\y_master>
 #include <My_YSI\y_safereturn>			// By Bartekdvd & Y_Less: 		http://forum.sa-mp.com/showthread.php?t=456132
 //-------<[ Pluginy ]>-------
-#include <sscanf2>						// By Y_Less, 2.8.2:			http://forum.sa-mp.com/showthread.php?t=570927
 #include <streamer>						// By Incognito, v2.8.2:		http://forum.sa-mp.com/showthread.php?t=102865
 
 
@@ -49,7 +49,7 @@
 #define VERSION "v" #MAJOR "." #MINOR "." #RELEASE
 #define COMPILED_IN "15.02.2017"
 #define DEBUG_MODE 1
-#if DEBUG_MODE==1
+#if DEBUG_MODE > 0
 	#warning DEBUG_MODE_ON!
 #endif
 
@@ -156,7 +156,6 @@ public OnGameModeInit()
 	SetGameModeText("Mrucznik-RP "VERSION);
 	SetMapNameText("Los Santos + Miasteczka");
 	SendRconCommand("stream_distance "#STREAM_DISTANCE_S);
-	regex_syntax(SYNTAX_PERL);
 	
 	//Ustawienia rozgrywki:
 	AllowInteriorWeapons(1); //broñ w intkach
@@ -171,7 +170,7 @@ public OnGameModeInit()
 		// - on  (broñ trzymana jest normalnie, wszystkie skiny chodz¹ jak CJ)
 	
 	//£¹czenie z mysql:
-	MruMySQL_Connect();
+	if(!MruMySQL_Connect()) return 0;
 	
 	//Uruchamianie timerów:
 	timery_Init();
@@ -187,6 +186,12 @@ public OnGameModeInit()
 	print("    <<< Ladowanie modulow...");
 	
 	print("    >>> Pomyslnie zaladowano wszystkie moduly...");
+	
+	#if DEBUG_MODE > 0
+		print("    <<< Ladowanie botów...");
+		Debug_LoadNPCs();
+		print("    <<< Boty za³adowane...");
+	#endif
 	
 	print(">>> Wykonano. Gamemode pomyslnie uruchomiony.\n");
 	return 1;
@@ -212,6 +217,16 @@ public OnPlayerRequestClass(playerid, classid)
 
 public OnPlayerConnect(playerid)
 {
+	Command_SetPlayerNamed("l", playerid, true);
+	Command_SetPlayerNamed("b", playerid, true);
+	Command_SetPlayerNamed("k", playerid, true);
+	Command_SetPlayerNamed("s", playerid, true);
+	Command_SetPlayerNamed("me", playerid, true);
+	Command_SetPlayerNamed("do", playerid, true);
+	
+	OnPlayerLogin(playerid);
+
+	SendClientMessage(playerid, -1, "No witam");
 	return 1;
 }
 
@@ -225,6 +240,13 @@ public OnPlayerDisconnect(playerid, reason)
 
 public OnPlayerSpawn(playerid)
 {
+	#if DEBUG_MODE > 0
+	if(IsPlayerNPC(playerid))
+	{
+		SetPlayerSkin(playerid, 281);
+	}
+	#endif
+
 	return 1;
 }
 
@@ -246,6 +268,22 @@ public OnVehicleDeath(vehicleid, killerid)
 
 public OnPlayerText(playerid, text[])
 {
+	#if DEBUG_MODE > 0
+	if(IsPlayerNPC(playerid))
+	{
+		if(text[0] == '#')
+		{
+			return 1;
+		}
+		printf("[Bot %s:] %s", GetNick(playerid), text);
+		return 0;
+	}
+	else if(text[0] == 'b' && text[1] == 'o' && text[2] == 't')
+	{
+		return 1;
+	}
+	#endif
+
 	Chat(playerid, ChatICAdditions(playerid, text));
 	return 0;
 }
@@ -409,13 +447,48 @@ public OnPlayerUpdate(playerid)
     COMMAND_BAD_PREFIX    = 8 , // Used "/" instead of "#", or something similar.
     COMMAND_INVALID_INPUT = 10, // Didn't type "/something".
 */ 
-public e_COMMAND_ERRORS:OnPlayerCommandPerformed(playerid, cmdtext[], e_COMMAND_ERRORS:success)
+public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_ERRORS:success)
 {
     switch (success)
     {
+        case COMMAND_ZERO_RET:
+        {
+            ServerFail(playerid, "Komenda zwróci³a 0 (b³¹d?)");
+        }
+        case COMMAND_OK:
+        {
+        }
         case COMMAND_UNDEFINED:
         {
-             // Your code here.
+            ServerFail(playerid, "Taka komenda nie istnieje!");
+        }
+		case COMMAND_DENIED:
+        {
+            ServerFail(playerid, "Nie masz uprawnieñ do u¿ywania tej komendy!");
+        }
+		case COMMAND_HIDDEN:
+        {
+            ServerFail(playerid, "Taka komenda nie istnieje! (istnieje xD)");
+        }
+		case COMMAND_NO_PLAYER:
+        {
+            Error("Mrucznik-RP", "OnPlayerCommandPerformed", "Used by a player who shouldn't exist", playerid);
+        }
+		case COMMAND_DISABLED:
+        {
+            ServerFail(playerid, "U¿ywanie przez Ciebie komend zosta³o zablokowane przez administratora.");
+        }
+		case COMMAND_BAD_PREFIX:
+        {
+            ServerFail(playerid, "BAD PREFIX!");
+        }
+		case 9:
+        {
+            ServerFail(playerid, "9 - nie by³o napisane od czego to!");
+        }
+		case COMMAND_INVALID_INPUT:
+        {
+            ServerFail(playerid, "INVAILD INPUT!");
         }
     }
     return COMMAND_OK;

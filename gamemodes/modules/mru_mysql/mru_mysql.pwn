@@ -82,7 +82,7 @@ MruMySQL_Connect() //OnGameModeInit
 		mysql_log(ERROR | WARNING); // release
 	#endif
 	// Po³¹czenie MySQL: (const host[], const user[], const password[], const database[], MySQLOpt:option_id = MySQLOpt:0)
-    gMySQL = mysql_connect(MYSQL_HOST, MYSQL_USER, MYSQL_DATABASE, MYSQL_PASS);
+    gMySQL = mysql_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PASS, MYSQL_DATABASE);
 	
 	if(mysql_errno() != 0)
 	{

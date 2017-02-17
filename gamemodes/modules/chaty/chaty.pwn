@@ -8,7 +8,7 @@
 */
 //Adnotacje:
 /*
-
+	W razie lagów mo¿na to zoptymalizowaæ by ca³e parsowanie textu by³o w 1 funkcji
 */
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
@@ -49,30 +49,29 @@ stock ChatOOCAdditions(playerid, text[])
 stock WykonajEmotki(playerid, text[])
 {
 	new string[256];
-	new minki[][2][] = {
-		{":)","uœmiecha siê."},
-		{";)","puszcza oczko."},
-		{":(","zasmuci³ siê."},
-		{":D","œmieje siê."},
-		{";D","puszcza oczko wpadaj¹c w gromki œmiech."},
-		{"xD","skis³ ze œmiechu."},
-		{":P","wystawia jêzyk."},
-		{"xP","wystawia jêzyk po czym wybucha gromkim œmiechem."}
+	new emotki[7][] = {
+		":)",
+		";)",
+		":(",
+		":D",
+		";D",
+		"xD",
+		":P"
 	};
 	
 	strcat(string, text);
-	new bool:brakZamian, minka;
+	new bool:brakZamian;
 	do
 	{
-		brakZamian = true;
-		for(new i=0; i<sizeof(minki); i++)
+		brakZamian = false;
+		for(new i=0; i<sizeof(emotki); i++)
 		{
-			minka = strfind(string, minki[i][0], true);
-			if(minka != -1)
+			new pozycjaEmotki = strfind(string, emotki[i]);
+			if(pozycjaEmotki != -1)
 			{
-				Me(playerid, minki[i][1]);
-				strdel(string, minka, minka+strlen(minki[i][0]));
-				brakZamian = false;
+				defer WyswietlMeEmotki(playerid, i);
+				strdel(string, pozycjaEmotki, pozycjaEmotki+strlen(emotki[i]));
+				brakZamian = true;
 			}
 		}
 	}
@@ -80,34 +79,43 @@ stock WykonajEmotki(playerid, text[])
 	return string;
 }
 
+timer WyswietlMeEmotki[0](playerid, emotka)
+{
+	new emotki[7][] = {
+		"uœmiecha siê.",
+		"puszcza oczko.",
+		"zasmuci³ siê.",
+		"œmieje siê.",
+		"puszcza oczko wpadaj¹c w gromki œmiech.",
+		"skis³ ze œmiechu.",
+		"wystawia jêzyk."
+	};
+	Me(playerid, emotki[emotka]);
+}
+
 stock KolorujWstawkiMe(text[])
 {
 	new string[256];
 	strcat(string, text);
-	for(;;)
+	new stars = strfind(string, "**");
+	if(stars != -1)
 	{
-		new stars = strfind(string, "**");
-		if(stars != -1)
+		new nextStars = strfind(string, "**", true, stars+2);
+		if(nextStars != -1)
 		{
-			new nextStars = strfind(string, "**", true, stars+2);
-			if(nextStars != -1)
-			{
-				strdel(string, nextStars+2, strlen(string)-1);
-				strins(string, INCOLOR_PURPLE, stars);
-			}
-			else
-			{
-				strins(string, "**", strlen(string)-1);
-			}
+			strdel(string, nextStars+2, strlen(string));
+			strins(string, INCOLOR_PURPLE, stars);
 		}
-		else
-			break;
 	}
 	return string;
 }
 
+
+//----------< Chaty > --------------
 stock Chat(playerid, text[])
 {
+	if(text[0] =='\0') return 1;
+	
 	new string[256];
 	if(GetPlayerState(playerid) == PLAYER_STATE_DRIVER || GetPlayerState(playerid) == PLAYER_STATE_PASSENGER)
 	{ //(w pojeŸdzie)
@@ -130,6 +138,8 @@ stock Chat(playerid, text[])
 
 stock Krzyk(playerid, text[])
 {
+	if(text[0] =='\0') return 1;
+
 	new string[256];
 	if(GetPlayerState(playerid) == PLAYER_STATE_DRIVER || GetPlayerState(playerid) == PLAYER_STATE_PASSENGER)
 	{ //(w pojeŸdzie)
@@ -152,6 +162,8 @@ stock Krzyk(playerid, text[])
 
 stock Szept(playerid, text[])
 {
+	if(text[0] =='\0') return 1;
+	
 	new string[256];
 	if(GetPlayerState(playerid) == PLAYER_STATE_DRIVER || GetPlayerState(playerid) == PLAYER_STATE_PASSENGER)
 	{ //(w pojeŸdzie)

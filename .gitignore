@@ -26,3 +26,7 @@ $RECYCLE.BIN/
 
 #AMX file format
 *.amx
+
+#Logi
+*.txt
+logs
