@@ -1,0 +1,56 @@
+//interiory.def
+
+//---------------------------------------------<< Defines >>-------------------------------------------------//
+//----------------------------------------[ Modu³: interiory.def ]-------------------------------------------//
+//----------------------------------------------------*------------------------------------------------------//
+//----[                                                                                                 ]----//
+//----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
+//----[        ||| |||           ||| |||                      |||     ||||     |||     ||||             ]----//
+//----[       |||   |||         |||   |||                     |||       |||    |||       |||            ]----//
+//----[       ||     ||         ||     ||                     |||       |||    |||       |||            ]----//
+//----[      |||     |||       |||     |||                    |||     ||||     |||     ||||             ]----//
+//----[      ||       ||       ||       ||     __________     ||||||||||       ||||||||||               ]----//
+//----[     |||       |||     |||       |||                   |||    |||       |||                      ]----//
+//----[     ||         ||     ||         ||                   |||     ||       |||                      ]----//
+//----[    |||         |||   |||         |||                  |||     |||      |||                      ]----//
+//----[    ||           ||   ||           ||                  |||      ||      |||                      ]----//
+//----[   |||           ||| |||           |||                 |||      |||     |||                      ]----//
+//----[  |||             |||||             |||                |||       |||    |||                      ]----//
+//----[                                                                                                 ]----//
+//----------------------------------------------------*------------------------------------------------------//
+
+//
+
+//------------------<[ Makra: ]>-------------------
+#define Wyjdz(%0) Wejdz(%0)
+
+//------------------<[ Define: ]>-------------------
+//Ustawienia modu³u:
+#define MAX_BUDYNKOW 			100
+#define MAX_POMIESZCZEN			250
+#define MAX_DRZWI 				500
+#define MAX_WIND	 			50
+#define MAX_WINDA_DRZWI			10
+#define DOORS_RANGE				5.0
+
+//Typy w³aœcicieli:
+#define OWNER_TYPE_PUBLICZNY		0
+#define OWNER_TYPE_DOM				1
+#define OWNER_TYPE_FRAKCJA			2
+#define OWNER_TYPE_ORGANIZACJA		3
+#define OWNER_TYPE_GRACZ			4
+
+//D³ugoœci stringów:
+#define MAX_BUDYNEK_NAME		128
+#define MAX_POMIESZCZENIE_NAME	64
+#define MAX_DRZWI_NAME			32
+#define MAX_DRZWI3D_LENGTH		32
+
+//Pickupy i 3DTexty:
+#define TEXT3D_DRZWI_DRAWDISTANCE 30.0
+#define TEXT3D_UP_Z 0.6
+#define TEXT3D_INTERIOR_COLOR COLOR_LIGHTGREEN
+//#define DOOR_PICKUP_MODEL 	1239
+#define DOOR_PICKUP_TYPE 	1
+
+//end

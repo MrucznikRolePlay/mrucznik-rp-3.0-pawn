@@ -38,7 +38,7 @@ stock Log(plik[], text[])
 	gettime(data[0][0], data[0][1], data[0][2]);
 	getdate(data[1][0], data[1][1], data[1][2]);
 
-	format(string, sizeof(string), "[%i/%i/%i - %i:%i:%i] %s\r\n", data[1][0], data[1][1], data[1][2], data[0][0], data[0][1], data[0][2], text);
+	format(string, sizeof(string), "[%02i/%02i/%i - %02i:%02i:%02i] %s\r\n", data[1][0], data[1][1], data[1][2], data[0][0], data[0][1], data[0][2], text);
 	fwrite(file, string);
 	return fclose(file);
 }

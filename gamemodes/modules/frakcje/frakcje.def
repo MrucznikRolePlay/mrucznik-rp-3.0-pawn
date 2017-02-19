@@ -1,0 +1,67 @@
+//frakcje.def
+
+//---------------------------------------------<< Defines >>-------------------------------------------------//
+//-----------------------------------------[ Modu³: frakcje.def ]--------------------------------------------//
+//----------------------------------------------------*------------------------------------------------------//
+//----[                                                                                                 ]----//
+//----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
+//----[        ||| |||           ||| |||                      |||     ||||     |||     ||||             ]----//
+//----[       |||   |||         |||   |||                     |||       |||    |||       |||            ]----//
+//----[       ||     ||         ||     ||                     |||       |||    |||       |||            ]----//
+//----[      |||     |||       |||     |||                    |||     ||||     |||     ||||             ]----//
+//----[      ||       ||       ||       ||     __________     ||||||||||       ||||||||||               ]----//
+//----[     |||       |||     |||       |||                   |||    |||       |||                      ]----//
+//----[     ||         ||     ||         ||                   |||     ||       |||                      ]----//
+//----[    |||         |||   |||         |||                  |||     |||      |||                      ]----//
+//----[    ||           ||   ||           ||                  |||      ||      |||                      ]----//
+//----[   |||           ||| |||           |||                 |||      |||     |||                      ]----//
+//----[  |||             |||||             |||                |||       |||    |||                      ]----//
+//----[                                                                                                 ]----//
+//----------------------------------------------------*------------------------------------------------------//
+
+//
+
+//------------------<[ Makra: ]>-------------------
+//MySQL:
+//      Funkcja(id_frakcji, "Kolumna", wartoœæ);
+#define MruMySQL_SetFrakcjaString(%0,%1,%2) MruMySQL_SetString("mru_Frakcje", %2, "ID", %1, %0)
+#define MruMySQL_SetFrakcjaInt(%0,%1,%2) MruMySQL_SetString("mru_Frakcje", %2, "ID", %1, %0)
+#define MruMySQL_SetFrakcjaFloat(%0,%1,%2) MruMySQL_SetString("mru_Frakcje", %2, "ID", %1, %0)
+
+//------------------<[ Define: ]>-------------------
+//Ustawienia modu³u:
+#define ILOSC_FRAKCJI 	9
+#define ILOSC_RANG 		8
+#define MAX_WYDZIALOW 	5
+#define LIDER_RANGA 	7
+#define WYDZIAL_RANGA 	6
+#define BRAK_FRAKCJI 	-1
+#define BRAK_RANGI		-1
+
+//Nazwy frakcji:
+#define LSPD			0
+#define FBI				1
+#define SWAT			2
+#define LSMC			3
+#define DMV				4
+#define SAN				5
+#define HA				6
+
+//Limity:
+#define MAX_FRACTION_NAME	64
+#define MAX_FRACTION_SKROT	8
+#define MAX_FRACTION_MOTTO	128
+
+//Ustawienia textu:
+#define PANEL_LIDERA_KOMUNIKAT "\
+			Bilans frakcji\n\
+			Pracownicy\n\
+			Wydzia³y\n\
+			Pojazdy\n\
+			Wyposa¿enie\n\
+			Zarz¹dzaj nazwami\n\ 
+			"(FrakcjaInfo[frakcjaid][pChatyOOC]) ? ("{00FF00}Frakcyjne czaty OOC: ON") : ("{FF0000}Frakcyjne czaty OOC: OFF")
+
+#define PANEL_WYDZIALU_KOMUNIKAT "w trakcie rupienia"
+
+//end

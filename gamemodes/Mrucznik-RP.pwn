@@ -19,6 +19,7 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 //	Mrucznik® Role Play ----> stworzy³ Szymon 'Mrucznik' Gajda
+// Skrypterzy, którzy tak¿e pracowali nad map¹: PECET, niceCzlowiek
 
 //-------------------------------------------<[ Includy ]>---------------------------------------------------//
 //-                                                                                                         -//
@@ -26,8 +27,8 @@
 #include <fixes>
 //-------<[ Pluginy ]>-------
 #include <crashdetect>					// By Zeex, v4.18.1				https://github.com/Zeex/samp-plugin-crashdetect/releases
-#include <a_mysql>						// By BlueG, R41-2:				http://forum.sa-mp.com/showthread.php?t=56564 https://github.com/pBlueG/SA-MP-MySQL/releases
 #include <sscanf2>						// By Y_Less, 2.8.2:			http://forum.sa-mp.com/showthread.php?t=570927
+#include <Pawn.Regex>
 //--------<[ YSI ]>----------
 #include <YSI\y_iterate>
 #include <YSI\y_commands>
@@ -39,6 +40,10 @@
 #include <My_YSI\y_safereturn>			// By Bartekdvd & Y_Less: 		http://forum.sa-mp.com/showthread.php?t=456132
 //-------<[ Pluginy ]>-------
 #include <streamer>						// By Incognito, v2.8.2:		http://forum.sa-mp.com/showthread.php?t=102865
+#define MYSQL_USE_YINLINE true
+#include <a_mysql>						// By BlueG, R41-2:				http://forum.sa-mp.com/showthread.php?t=56564 https://github.com/pBlueG/SA-MP-MySQL/releases
+// By maddinat0r v1.3: https://github.com/maddinat0r/samp-tsconnector
+// By maddinat0r v0.3: https://github.com/maddinat0r/samp-log
 
 
 //------------------------------------------<[ Ustawienia ]>-------------------------------------------------//
@@ -60,6 +65,8 @@
 forward OnPlayerRegister(playerid);
 forward OnPlayerLogin(playerid);
 
+native WP_Hash(buffer[], len, const str[]);
+
 //--------------------------------<[ Wewnêtrzbe systemy oraz modu³y ]>---------------------------------------//
 //-                                                                                                         -//
 
@@ -70,24 +77,129 @@ forward OnPlayerLogin(playerid);
 
 //----< Modu³y - preprocesor >----
 #include "modules\mru_mysql\mru_mysql.def"
-#include "modules\logi\logi.def"
+#include "modules\konta\konta.def"
+#include "modules\payday\payday.def"
 #include "modules\chaty\chaty.def"
+#include "modules\logi\logi.def"
+#include "modules\admin\admin.def"
+#include "modules\antycheat\antycheat.def"
+#include "modules\system_aut\system_aut.def"
+#include "modules\wanted\wanted.def"
+#include "modules\frakcje\frakcje.def"
+	#include "modules\frakcje\LSPD\LSPD.def"
+	#include "modules\frakcje\FBI\FBI.def"
+	#include "modules\frakcje\NG\NG.def"
+	#include "modules\frakcje\LSMC\LSMC.def"
+	#include "modules\frakcje\DMV\DMV.def"
+	#include "modules\frakcje\BOR\BOR.def"
+	#include "modules\frakcje\GOV\GOV.def"
+	#include "modules\frakcje\SAN\SAN.def"
+	#include "modules\frakcje\TAXI\TAXI.def"
+	#include "modules\frakcje\HA\HA.def"
+#include "modules\organizacje\organizacje.def"
+#include "modules\prace\prace.def"
+#include "modules\interiory\interiory.def"
+#include "modules\domy\domy.def"
+#include "modules\biznesy\biznesy.def"
+#include "modules\textdrawy\textdrawy.def"
+#include "modules\obiekty\obiekty.def"
+#include "modules\pickupy\pickupy.def"
+#include "modules\3dtexty\3dtexty.def"
+#include "modules\komendy\komendy.def"
+#include "modules\oferty\oferty.def"
+#include "modules\fizjologia\fizjologia.def"
+#include "modules\animacje\animacje.def"
+#include "modules\pomoc\pomoc.def"
+#include "modules\ustawienia\ustawienia.def"
+#include "modules\statystyki\statystyki.def"
 #include "modules\keybindy\keybindy.def"
+#include "modules\bw\bw.def"
 #include "modules\debug\debug.def"
+#include "modules\tests\tests.def"
 
 //----< Modu³y - zmienne >----
 #include "modules\mru_mysql\mru_mysql.hwn"
-#include "modules\logi\logi.hwn"
+#include "modules\konta\konta.hwn"
+#include "modules\payday\payday.hwn"
 #include "modules\chaty\chaty.hwn"
+#include "modules\logi\logi.hwn"
+#include "modules\admin\admin.hwn"
+#include "modules\antycheat\antycheat.hwn"
+#include "modules\system_aut\system_aut.hwn"
+#include "modules\wanted\wanted.hwn"
+#include "modules\frakcje\frakcje.hwn"
+	#include "modules\frakcje\LSPD\LSPD.hwn"
+	#include "modules\frakcje\FBI\FBI.hwn"
+	#include "modules\frakcje\NG\NG.hwn"
+	#include "modules\frakcje\LSMC\LSMC.hwn"
+	#include "modules\frakcje\DMV\DMV.hwn"
+	#include "modules\frakcje\BOR\BOR.hwn"
+	#include "modules\frakcje\GOV\GOV.hwn"
+	#include "modules\frakcje\SAN\SAN.hwn"
+	#include "modules\frakcje\TAXI\TAXI.hwn"
+	#include "modules\frakcje\HA\HA.hwn"
+#include "modules\organizacje\organizacje.hwn"
+#include "modules\prace\prace.hwn"
+#include "modules\interiory\interiory.hwn"
+#include "modules\domy\domy.hwn"
+#include "modules\biznesy\biznesy.hwn"
+#include "modules\textdrawy\textdrawy.hwn"
+#include "modules\obiekty\obiekty.hwn"
+#include "modules\pickupy\pickupy.hwn"
+#include "modules\3dtexty\3dtexty.hwn"
+#include "modules\komendy\komendy.hwn"
+#include "modules\oferty\oferty.hwn"
+#include "modules\fizjologia\fizjologia.hwn"
+#include "modules\animacje\animacje.hwn"
+#include "modules\pomoc\pomoc.hwn"
+#include "modules\ustawienia\ustawienia.hwn"
+#include "modules\statystyki\statystyki.hwn"
 #include "modules\keybindy\keybindy.hwn"
+#include "modules\bw\bw.hwn"
 #include "modules\debug\debug.hwn"
+#include "modules\tests\tests.hwn"
 
 //----< Modu³y - funkcje >----
 #include "modules\mru_mysql\mru_mysql.pwn"
-#include "modules\logi\logi.pwn"
+#include "modules\konta\konta.pwn"
+#include "modules\payday\payday.pwn"
 #include "modules\chaty\chaty.pwn"
+#include "modules\logi\logi.pwn"
+#include "modules\admin\admin.pwn"
+#include "modules\antycheat\antycheat.pwn"
+#include "modules\system_aut\system_aut.pwn"
+#include "modules\wanted\wanted.pwn"
+#include "modules\frakcje\frakcje.pwn"
+	#include "modules\frakcje\LSPD\LSPD.pwn"
+	#include "modules\frakcje\FBI\FBI.pwn"
+	#include "modules\frakcje\NG\NG.pwn"
+	#include "modules\frakcje\LSMC\LSMC.pwn"
+	#include "modules\frakcje\DMV\DMV.pwn"
+	#include "modules\frakcje\BOR\BOR.pwn"
+	#include "modules\frakcje\GOV\GOV.pwn"
+	#include "modules\frakcje\SAN\SAN.pwn"
+	#include "modules\frakcje\TAXI\TAXI.pwn"
+	#include "modules\frakcje\HA\HA.pwn"
+#include "modules\organizacje\organizacje.pwn"
+#include "modules\prace\prace.pwn"
+#include "modules\interiory\interiory.pwn"
+#include "modules\domy\domy.pwn"
+#include "modules\biznesy\biznesy.pwn"
+#include "modules\textdrawy\textdrawy.pwn"
+#include "modules\obiekty\obiekty.pwn"
+#include "modules\pickupy\pickupy.pwn"
+#include "modules\3dtexty\3dtexty.pwn"
+#include "modules\komendy\komendy.pwn"
+#include "modules\oferty\oferty.pwn"
+#include "modules\fizjologia\fizjologia.pwn"
+#include "modules\animacje\animacje.pwn"
+#include "modules\pomoc\pomoc.pwn"
+#include "modules\ustawienia\ustawienia.pwn"
+#include "modules\statystyki\statystyki.pwn"
 #include "modules\keybindy\keybindy.pwn"
+#include "modules\bw\bw.pwn"
 #include "modules\debug\debug.pwn"
+#include "modules\tests\tests.pwn"
 
 //----< System - funkcje >----
 #include "system\funkcje.pwn"
@@ -152,6 +264,12 @@ public OnGameModeInit()
 {
 	print("<<< Wykonywanie OnGameModeInit...");
 	
+	#if DEBUG_MODE > 0
+		print("    <<< Ladowanie botów...");
+		Debug_LoadNPCs();
+		print("    <<< Boty za³adowane...");
+	#endif
+	
 	//Ustawienia gamemodu:
 	SetGameModeText("Mrucznik-RP "VERSION);
 	SetMapNameText("Los Santos + Miasteczka");
@@ -179,19 +297,26 @@ public OnGameModeInit()
 	Iter_Init(StreamedPlayers);
 	
 	//Tworzenie grup:
-	LoggedPlayer = Group_Create("loggedplayers");
+	LoggedPlayers = Group_Create("loggedplayers");
 	
 	
 	//-----< £adowanie modu³ów: >------
 	print("    <<< Ladowanie modulow...");
-	
+	antycheat_Init();
+	frakcje_Init();
+	organizacje_Init();
+	textdrawy_Init();
+	obiekty_Init();
+	interiory_Init();
+	texty3d_Init();
+	pickupy_Init();
+	fizjologia_Init();
+	pojazdy_Init();
 	print("    >>> Pomyslnie zaladowano wszystkie moduly...");
 	
-	#if DEBUG_MODE > 0
-		print("    <<< Ladowanie botów...");
-		Debug_LoadNPCs();
-		print("    <<< Boty za³adowane...");
-	#endif
+	//Skiny:
+	AddPlayerClass(35, -2819.9297,1134.0607,26.0766, 326.0, 0, 0, 0, 0, 0, 0);
+	AddPlayerClass(37, -2819.9297,1134.0607,26.0766, 326.0, 0, 0, 0, 0, 0, 0);
 	
 	print(">>> Wykonano. Gamemode pomyslnie uruchomiony.\n");
 	return 1;
@@ -201,7 +326,13 @@ public OnGameModeExit()
 {
     print("<<< Wykonywanie OnGameModeExit...");
 	
+	//Timery:
 	timery_Delete();
+	
+	//Modu³y:
+	textdrawy_Exit();
+	interiory_Exit();
+	pojazdy_Exit();
 	
 	MruMySQL_Exit();
 	
@@ -211,30 +342,69 @@ public OnGameModeExit()
 
 public OnPlayerRequestClass(playerid, classid)
 {
-
+	ApplyAnimation(playerid, "ON_LOOKERS", "wave_loop", 3.5, 1, 0, 0, 0, 0, 1);
 	return 1;
 }
 
 public OnPlayerConnect(playerid)
 {
-	Command_SetPlayerNamed("l", playerid, true);
-	Command_SetPlayerNamed("b", playerid, true);
-	Command_SetPlayerNamed("k", playerid, true);
-	Command_SetPlayerNamed("s", playerid, true);
-	Command_SetPlayerNamed("me", playerid, true);
-	Command_SetPlayerNamed("do", playerid, true);
+	new nick[MAX_PLAYER_NAME];
+	GetPlayerName(playerid, nick, MAX_PLAYER_NAME); //pobieranie nicku
+	GetPlayerName(playerid, PlayerInfo[playerid][pNick], MAX_PLAYER_NAME); //pobieranie nicku
 	
-	OnPlayerLogin(playerid);
-
-	SendClientMessage(playerid, -1, "No witam");
+	//Komunikat powitalny:
+	ClearChat(playerid);
+	MruMessageF(playerid, COLOR_WHITE, "SERVER: Witaj %s", nick);
+	
+	if(!IsNickCorrect(nick))
+	{
+		ServerError(playerid, "Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko lub Imiê_Imiê_Nazwisko!");
+		ServerError(playerid, "Wiêcej na temat poprawnoœci nicku mo¿esz przeczytaæ na naszym forum w dziale Regulaminy i Zasady -> Lista Kar i Zasad");
+		KickEx(playerid);
+		return 1;
+	}
+	
+	//Inicjowanie modu³ów:
+	LadujPlayerTextdrawy(playerid); //zmien nazwe
+	obiekty_OnPlayerConnect(playerid);
+	
+	konta_Logowanie(playerid);
+	
+	defer Kamera(playerid); //Tymczasowa wybiera³ka
 	return 1;
+}
+
+timer Kamera[1500](playerid)
+{
+	SetPlayerPos(playerid, 	-2819.9297,1134.0607,26.0766);
+	SetPlayerFacingAngle(playerid, 326.0);
+	SetPlayerCameraPos(playerid, -2801.6691894531, 1151.7545166016, 31.548196792603);
+	SetPlayerCameraLookAt(playerid, -2819.05078125, 1141.4909667969, 23.314708709717);
+	PlayerPlaySound(playerid, 1062, -2818.0, 1100.0, 0.0);
+	ApplyAnimation(playerid, "ON_LOOKERS", "wave_loop", 3.5, 1, 0, 0, 0, 0, 1);
+	ShowWelcomeScreenTextdraw(playerid);
 }
 
 public OnPlayerDisconnect(playerid, reason)
 {
-
+	if(IsPlayerLogged(playerid))
+	{
+		//Modu³y:
+		oferty_OnPlayerDisconnect(playerid);
+		frakcje_OnPlayerDisconnect(playerid);
+		organizacje_OnPlayerDisconnect(playerid);
+		
+		CreateDiconnect3DText(playerid, reason);
+		
+		konta_SaveAccount(playerid);
+		konta_DestroyORM(playerid);
+	}
+	
 	//Iteratory:
 	Iter_Clear(StreamedPlayers[playerid]); //czyszczenie pêtli streamed players (widocznych graczy dla gracza)
+	
+	//Modu³y:
+	UsunPlayerTextdrawy(playerid); //zmien nazwe
 	return 1;
 }
 
@@ -246,13 +416,56 @@ public OnPlayerSpawn(playerid)
 		SetPlayerSkin(playerid, 281);
 	}
 	#endif
+	
+	if(IsPlayerLogged(playerid))
+	{
+		SetPlayerSpawn(playerid);
+		
+		SetPlayerPos(playerid, 1173.2563, -1323.3102, 15.3943);
+	}
+	else
+	{
+		return 0;
+	}
+	return 1;
+}
 
+SetPlayerSpawn(playerid)
+{
+	switch (PlayerInfo[playerid][pSpawn])
+	{
+		case 1:
+		{
+			if(PlayerInfo[playerid][pFrakcja] == BRAK_FRAKCJI)
+			{
+				PlayerInfo[playerid][pSpawn] = 0;
+				SetPlayerSpawn(playerid);
+			}
+			else
+				FrakcjaSpawn(playerid);
+		}
+		/*case 2:
+		{	
+			if(PlayerInfo[playerid][pOrganizacja] == BRAK_FRAKCJI)
+			{
+				PlayerInfo[playerid][pSpawn] = 0;
+				SetPlayerSpawn(playerid);
+			}
+			else
+				OrganizacjaSpawn(playerid);
+		}*/
+		default:
+		{
+			SetPlayerPos(playerid, 1173.2563, -1323.3102, 15.3943);
+			EnterPomieszczenie(playerid, 0);
+		}
+	}
 	return 1;
 }
 
 public OnPlayerDeath(playerid, killerid, reason)
 {
-	
+	wanted_OnPlayerDeath(playerid, killerid, reason);
 	return 1;
 }
 
@@ -345,6 +558,27 @@ public OnPlayerObjectMoved(playerid, objectid)
 
 public OnPlayerPickUpPickup(playerid, pickupid)
 {
+	/**************** Obs³uga wchodzenia do interiorów - pickupy ****************/
+	if( PlayerInfo[playerid][pDoorSettings] == 1 )
+	{
+		new time = ((PlayerInfo[playerid][pDoorKey]&0b11111110000000)>>>7);
+		if(GetPVarInt(playerid, "PickupTick") < time)
+		{
+			new string[8];
+			if(GetTickCountDifference(GetTickCount(), GetPVarInt(playerid, "PickupTimestamp")) > 2500) //2.5s
+				SetPVarInt(playerid, "PickupTick", 0);
+			format(string, sizeof(string), "~w~%d", time-GetPVarInt(playerid, "PickupTick"));
+			GameTextForPlayer(playerid, string, 2500, 3);
+			SetPVarInt(playerid, "PickupTick", GetPVarInt(playerid, "PickupTick")+1);
+			SetPVarInt(playerid, "PickupTimestamp", GetTickCount());
+		}
+		else
+		{
+			GameTextForPlayer(playerid, "~g~Wejscie", 1000, 3);
+			SetPVarInt(playerid, "PickupTick", 0);
+			interiory_SprawdzDrzwiPickup(playerid, pickupid);
+		}
+	}
 	return 1;
 }
 
@@ -380,6 +614,40 @@ public OnPlayerInteriorChange(playerid, newinteriorid, oldinteriorid)
 
 public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 {
+	//Pobieranie klawiszy od gracza
+	if(GetPVarInt(playerid, "GettingKeys"))
+	{
+		SetPVarInt(playerid, "PobraneKlawisze", GetPVarInt(playerid, "PobraneKlawisze") | newkeys);
+		if(newkeys == 0)
+		{
+			new string[64];
+			SetPVarInt(playerid, "GettingKeys", 0);
+			GetPVarString(playerid, "GettingKeysFunction", string, sizeof(string));
+			if(!isnull(string))
+				CallRemoteFunction(string, "i", playerid);
+			else
+				Error("Mrucznik-RP", "OnPlayerKeyStateChange", "Nie podano funkcji - CallRemoteFunction", playerid);
+		}
+	}
+	
+	//Obs³uga dynamicznych klawiszy
+	if(PlayerInfo[playerid][pDoorKey] != 0 && PlayerInfo[playerid][pDoorSettings] == 0)
+	{
+		if(PRESSED(PlayerInfo[playerid][pDoorKey]))
+		{
+			SprawdzDrzwi(playerid);
+		}
+	}
+	
+	//Obs³uga klawiszy ustawionych na twardo
+	if(PRESSED(KEY_SUBMISSION))
+    {
+        SelectTextDraw(playerid, COLOR_NEWS);
+    }
+	if(PRESSED(KEY_JUMP))
+	{
+		SetPVarInt(playerid, "Jumping", 1);
+	}
 	return 1;
 }
 
@@ -424,6 +692,17 @@ public OnPlayerClickPlayer(playerid, clickedplayerid, source)
 
 public OnPlayerUpdate(playerid)
 {
+	//Anty BH
+	if(GetPVarInt(playerid, "Jumping") == 1)
+	{
+		new Float:x, Float:y, Float:z;
+		GetPlayerVelocity(playerid, x, y, z);
+		if(z > 0.05)
+		{
+			SetPlayerVelocity(playerid, x*0.6, y*0.6, z);
+			SetPVarInt(playerid, "Jumping", 0);
+		}
+	}
 	return 1;
 }
 
@@ -503,12 +782,30 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 //-----------------------------------------------------------------------------------------------------------//
 public OnPlayerRegister(playerid)
 {
+	new string[128];
 	
+	ServerInfo(playerid, "Zarejestrowa³eœ siê");
+	format(string, sizeof(string), "Zarejestrowal sie poprawnie z IP: %s", GetIp(playerid));
+	LoginLog(playerid, string);
+	
+	LoginPlayer(playerid);
 	return 1;
 }
 
 public OnPlayerLogin(playerid)
 {
-	Group_SetPlayer(LoggedPlayer, playerid, true);
+	new string[128];
+	
+	ServerInfo(playerid, "Zalogowa³eœ siê!");
+	format(string, sizeof(string), "Zalogowal sie poprawnie z IP: %s", GetIp(playerid));
+	LoginLog(playerid, string);
+	
+	LoginPlayer(playerid);
 	return 1;
+}
+
+LoginPlayer(playerid)
+{
+	Group_SetPlayer(LoggedPlayers, playerid, true);
+	SpawnPlayer(playerid);
 }

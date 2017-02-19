@@ -73,7 +73,9 @@ INI:mysql_connect[](name[], value[])
 
 MruMySQL_Connect() //OnGameModeInit
 {
-	INI_Load("mysql_connect.ini");
+	if(!fexist("MySQL/mysql_connect.ini"))
+		return Error("Mru_MySQL", "MruMySQL_Connect", "Brak pliku MySQL/mysql_connect.ini");
+	INI_Load("MySQL/mysql_connect.ini");
 
 	//Logi MySQL
 	#if DEBUG_MODE==1
@@ -104,8 +106,7 @@ MruMySQL_Connect() //OnGameModeInit
 		print("MYSQL: Polaczono sie z baza MySQL");
 	}
 	
-	//Tworzenie bazy danych, je¿eli nie istnieje
-	MruMySQL_CreateDatabase();
+	CreateTablesIfNotExists();
 	return 1;
 }
 
@@ -115,7 +116,7 @@ MruMySQL_Exit() //OnGameModeExit
 	return 1;
 }
 
-stock MruMySQL_CreateDatabase()
+stock CreateTablesIfNotExists()
 {
 	//mysql_query(gMySQL, "CREATE TABLE IF NOT EXISTS `mru_konta`", false);
 	return 1;

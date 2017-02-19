@@ -1,0 +1,104 @@
+//konta.hwn
+
+//----------------------------------------------<< Header >>-------------------------------------------------//
+//------------------------------------------[ Modu³: konta.hwn ]---------------------------------------------//
+//----------------------------------------------------*------------------------------------------------------//
+//----[                                                                                                 ]----//
+//----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
+//----[        ||| |||           ||| |||                      |||     ||||     |||     ||||             ]----//
+//----[       |||   |||         |||   |||                     |||       |||    |||       |||            ]----//
+//----[       ||     ||         ||     ||                     |||       |||    |||       |||            ]----//
+//----[      |||     |||       |||     |||                    |||     ||||     |||     ||||             ]----//
+//----[      ||       ||       ||       ||     __________     ||||||||||       ||||||||||               ]----//
+//----[     |||       |||     |||       |||                   |||    |||       |||                      ]----//
+//----[     ||         ||     ||         ||                   |||     ||       |||                      ]----//
+//----[    |||         |||   |||         |||                  |||     |||      |||                      ]----//
+//----[    ||           ||   ||           ||                  |||      ||      |||                      ]----//
+//----[   |||           ||| |||           |||                 |||      |||     |||                      ]----//
+//----[  |||             |||||             |||                |||       |||    |||                      ]----//
+//----[                                                                                                 ]----//
+//----------------------------------------------------*------------------------------------------------------//
+
+//
+
+//------------------<[ Enumy: ]>--------------------
+enum pInfo
+{
+	ORM:pORM,
+	ORM:pStatystyki,
+	pUID,
+	pNick[MAX_PLAYER_NAME],
+	pOldPass[64],
+	pPass[PASSWORD_HASH_LENGTH],
+	pPassPos,
+	pOnline,
+	
+	//G³ówne:
+	pLevel,
+	pRespekt,
+	pKP,			//unix timestamp (czasowe)
+	pWiek,
+	pRasa,
+	pSkin,
+	
+	//Ustawienia:
+	pSpawn,
+	pDoorSettings,
+	pDoorKey,
+	pBitUstawienia,	//bitowe
+	
+	//Wartoœciowe:
+	pMC, 			//Mrucznik Coinsy $$$
+	pHajs,
+	pBank,
+	
+	//Dom:
+	pDom,
+	//pBiznes,
+	
+	//Pojazdy:
+	pPojazd[MAX_SPAWNED_VEHICLES],
+	
+	//Kary:
+	pWarn,
+	pAJ,
+	
+	//Frakcja/Organizacja:
+	pFrakcja,
+	pOrganizacja,
+	pRanga,
+	
+	//Praca:
+	pPraca,
+	
+	//Skille:
+	
+	//Statystyki:
+	pCzasOnline,
+	
+	//Przywileje:
+	pAdmin,
+	
+	//Przestêpstwa
+	pWL,
+	pCzasWiezienia,
+	
+	//Pozycja i HP
+	pHP,
+	pArmor,
+	Float:pX,
+	Float:pY,
+	Float:pZ,
+	Float:pA,
+	pInt,
+	pVW,
+	
+	//Inne:
+	pBW
+};
+new PlayerInfo[MAX_PLAYERS][pInfo];
+
+//-----------------<[ Zmienne: ]>-------------------
+//------------------<[ Forwardy: ]>--------------------
+
+//end

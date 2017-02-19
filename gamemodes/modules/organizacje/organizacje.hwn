@@ -1,15 +1,7 @@
-//zmienne.pwn
+//organizacje.hwn
 
-//-----------------------------------------------<< System >>------------------------------------------------//
-//------------------------------------------[ Modu³: zmienne.pwn ]-------------------------------------------//
-//Opis:
-/*
-
-*/
-//Adnotacje:
-/*
-
-*/
+//----------------------------------------------<< Header >>-------------------------------------------------//
+//---------------------------------------[ Modu³: organizacje.hwn ]------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,83 +19,50 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 
-//------------------<[ Tablice: ]>-------------------
-new gAntySpam[MAX_PLAYERS];
-new gCaptcha[MAX_PLAYERS][128];
+//
 
-//------------------<[ Globalne enumy: ]>-------------------
+//------------------<[ Enumy: ]>--------------------
+enum eOrganizacje
+{
+	oZajeta,
+	oTyp,
+	oSpecjalnosc,
+	oNazwa[ORG_MAX_NAZWA],
+	oSkrot[ORG_MAX_SKROT],
+	oMotto[ORG_MAX_MOTD],
+	oKolor,
+	oPracownicy
+};
+new Organizacja[MAX_ORGANIZATIONS][eOrganizacje];
+new oRanga[MAX_ORGANIZATIONS][ORG_ILOSC_RANG][ORG_MAX_RANGA];
 
-
-//------------------<[ Tablice zainicjalizowane: ]>-------------------
-new gMonths[12][] = {
-	"Styczen",
-	"Luty ",
-	"Marzec",
-	"Kwicien",
-	"Maj  ",
-	"Czerwiec",
-	"Lipiec",
-	"Sierpien",
-	"Wrzesien",
-	"Pazdziernik",
-	"Listopad",
-	"Grudzien"
+new oAwans[ORG_ILOSC_TYPOW][4] = {
+//Warunki jakie musi spe³niæ organizacja aby awansowaæ na nastêpny level
+//  Cz³onkowie, Koszt, Tereny/Biznesy
+	{4, 100, 0}, // Banda 1/Rodzina 1
+	{8, 200, 1}, // Banda 2/Rodzina 2
+	{12, 300, 2}, // Banda 3/Rodzina 3
+	{15, 400, 3}, // Szajka
+	{15, 400, 4}, // Gang
+	{15, 400, 3}, // Mafia
+	{40, 500, 5}, // SzajkaX
+	{40, 500, 10}, // GangX
+	{40, 500, 7} // MafiaX
 };
 
-new gGunNames[47][] = {
-	"Brak",//0
-	"Kastet",//1
-	"Kij golfowy",//2
-	"Pa³ka policyjna",//3
-	"Nó¿",//4
-	"Kij Baseballowy",//5
-	"£opata",//6
-	"Kij bilardowy",//7
-	"Katana",//8
-	"Pi³a mechaniczna",//9
-	"Purple Dildo",//10
-	"Small White Vibrator",//11
-	"Large White Vibrator",//12
-	"Silver Vibrator",//13
-	"Kwiaty",//14
-	"Laska",//15
-	"Granaty",//16
-	"Gaz ³zawi¹cy",//17
-	"Koktajl Mo³otova",//18
-	"B³¹d",//19
-	"B³¹d",//20
-	"B³¹d",//21
-	"Pistolet 9mm",//22
-	"Pistolet z t³umikiem",//23
-	"Desert Eagle",//24
-	"Shotgun",//25
-	"Obrzyny",//26
-	"Spas-12",//27
-	"UZI",//28
-	"MP5",//29
-	"AK-47",//30
-	"M4",//31
-	"TEC-9",//32
-	"Gwintówka",//33
-	"Snajperka",//34
-	"RPG",//35
-	"Wyrzutnia rakiet",//36
-	"Ogniomiotacz",//37
-	"Minigun",//38
-	"C4",//39
-	"Detonator",//40
-	"Sprej",//41
-	"Gaœnica",//42
-	"Aparat",//43
-	"Nightvision Goggle",//44
-	"Thermal Goggles",//45
-	"Spadochron"//46
+//---[ Wojny gangów ]---
+enum eTereny
+{
+	tID,
+	tKox
 };
+new oTereny[ORG_MAX_TERENOW][eTereny];
 
-//------------------<[ Grupy i Iteratory: ]>-------------------
-new Group:LoggedPlayers; //gracze online
-new Iterator:StreamedPlayers[MAX_PLAYERS]<MAX_PLAYERS>; //gracze zestreamowanie dla gracza
+//-----------------<[ Zmienne: ]>-------------------
 
-//------------------<[ Zmienne: ]>-------------------
+//Iteratory:
+new Iterator:wOrganizacji[MAX_ORGANIZATIONS]<MAX_PLAYERS>;
+
+//------------------<[ Forwardy: ]>--------------------
 
 //end

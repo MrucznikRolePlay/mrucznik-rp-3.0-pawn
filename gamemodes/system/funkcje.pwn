@@ -134,7 +134,7 @@ stock HexToInt(string[])
 //----------------------------------[Sprawdzanie:]-----------------------------------
 stock IsPlayerLogged(playerid)
 {
-	return Group_GetPlayer(LoggedPlayer, playerid);
+	return Group_GetPlayer(LoggedPlayers, playerid);
 }
 
 stock IsColorHex(color[])
@@ -155,10 +155,13 @@ stock IsColorHex(color[])
 
 stock IsNickCorrect(nick[])
 {
-	if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$" >= 0)
+	new regex:nickRegex = regex_new("^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$");
+	if(regex_check(nick, nickRegex) >= 0)
 	{
+		regex_delete(nickRegex); 
 		return 1;
 	}
+	regex_delete(nickRegex); 
 	return 0;
 }
 
@@ -538,7 +541,7 @@ stock RangeMessage(playerid, kolor, text[], Float:zasieg=30.0)
 	GetPlayerPos(playerid, x,y,z);
 	if (zasieg > STREAM_DISTANCE)
 	{
-		foreach(new i : GroupMember(LoggedPlayer))
+		foreach(new i : GroupMember(LoggedPlayers))
 		{
 			if(GetPlayerVirtualWorld(playerid) == GetPlayerVirtualWorld(i))
 			{
@@ -569,7 +572,7 @@ stock RangeMessageGradient(playerid, text[], Float:zasieg, kolormin, kolormax)
 	GetPlayerPos(playerid, x,y,z);
 	if (zasieg > STREAM_DISTANCE)
 	{
-		foreach(new i : GroupMember(LoggedPlayer))
+		foreach(new i : GroupMember(LoggedPlayers))
 		{
 			if(GetPlayerVirtualWorld(playerid) == GetPlayerVirtualWorld(i))
 			{
@@ -664,15 +667,16 @@ stock CheckCaptcha(playerid, text[])
 //-----------------------------------[Ex - funkcje zamiast:]------------------------------------
 stock KickEx(playerid)
 {
-	inline Kickuj()
-	{
-		Kick(playerid);
-	}
-	SetTimerInline(using inline Kickuj, 500, 0);
+	defer KickTimer(playerid);
+}
+
+timer KickTimer[500](playerid)
+{
+	Kick(playerid);
 }
 
 //¯ycie i pancerz
-stock SetPlayerHealthEx(playerid, Float:health)
+/*stock SetPlayerHealthEx(playerid, Float:health)
 {
 	ACExpect(playerid, AC_HP, 1);
 	gHealth[playerid] = health;
@@ -705,6 +709,6 @@ stock ResetPlayerMoneyEx(playerid)
 	AC_Money(playerid);
 	PlayerInfo[playerid][pHajs] = 0;
 	return ResetPlayerMoney(playerid);
-}
+}*/
 
 //end
