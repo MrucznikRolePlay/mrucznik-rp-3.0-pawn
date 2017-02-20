@@ -68,7 +68,7 @@ stock CreateDiconnect3DText(playerid, reason)
 		
 	Disconnect3DText[playerid] = CreateDynamic3DTextLabel( text, COLOR_GREY, x, y, z, 30.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, false, vw, int);
 	
-	defer Destroy3DTextTimer(Disconnect3DText[playerid]);
+	defer Destroy3DTextTimer(playerid);
 	return 1;
 }
 

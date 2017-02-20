@@ -38,17 +38,17 @@ stock konta_Logowanie(playerid)
 
     inline qKonto()
     {
-        new rows, fields;
+        new rows;
         
-        cache_get_data(rows, fields, gMySQL);
+		cache_get_row_count(rows);
         if(rows) //Czy istnieje konto o podanym nicku
 		{
 			//Konto istnieje
 			new logowania;
 			
-			PlayerInfo[playerid][pUID] = cache_get_row_int (0, 0, gMySQL);
-			cache_get_row (0, 1, PlayerInfo[playerid][pPass], gMySQL, PASSWORD_HASH_LENGTH);
-			PlayerInfo[playerid][pPassPos] = cache_get_row_int (0, 2, gMySQL);
+			cache_get_value_index_int(0, 0, PlayerInfo[playerid][pUID]);
+			cache_get_value_index(0, 1, PlayerInfo[playerid][pPass], PASSWORD_HASH_LENGTH);
+			cache_get_value_index_int(0, 2, PlayerInfo[playerid][pPassPos]);
 			
 			inline iLogowanie( pid, dialogid, response, listitem, string:inputtext[] ) 
 			{
@@ -267,7 +267,7 @@ stock static CreateORM(playerid)
 	orm_addvar_int(id, PlayerInfo[playerid][pWL], "WantedLevel");
 	
 	//Pozycja i HP
-	orm_addvar_int(id, PlayerInfo[playerid][pHP], "HP");
+	orm_addvar_int(id, PlayerInfo[playerid][pHP], "Health");
 	orm_addvar_int(id, PlayerInfo[playerid][pArmor], "Armor");
 	orm_addvar_float(id, PlayerInfo[playerid][pX], "X");
 	orm_addvar_float(id, PlayerInfo[playerid][pY], "Y");

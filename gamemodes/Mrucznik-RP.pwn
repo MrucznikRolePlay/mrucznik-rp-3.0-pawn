@@ -40,11 +40,15 @@
 #include <My_YSI\y_safereturn>			// By Bartekdvd & Y_Less: 		http://forum.sa-mp.com/showthread.php?t=456132
 //-------<[ Pluginy ]>-------
 #include <streamer>						// By Incognito, v2.8.2:		http://forum.sa-mp.com/showthread.php?t=102865
-#define MYSQL_USE_YINLINE true
+#include <a_mysql_yinline>				// By maddinat0r, v1.0.1 		https://github.com/maddinat0r/samp-mysql-yinline-include
 #include <a_mysql>						// By BlueG, R41-2:				http://forum.sa-mp.com/showthread.php?t=56564 https://github.com/pBlueG/SA-MP-MySQL/releases
+
+//TODO:
 // By maddinat0r v1.3: https://github.com/maddinat0r/samp-tsconnector
 // By maddinat0r v0.3: https://github.com/maddinat0r/samp-log
+// By MP2: http://forum.sa-mp.com/showthread.php?p=2362690
 
+native WP_Hash(buffer[], len, const str[]);
 
 //------------------------------------------<[ Ustawienia ]>-------------------------------------------------//
 //-                                                                                                         -//
@@ -64,8 +68,6 @@
 //-                                                                                                         -//
 forward OnPlayerRegister(playerid);
 forward OnPlayerLogin(playerid);
-
-native WP_Hash(buffer[], len, const str[]);
 
 //--------------------------------<[ Wewnêtrzbe systemy oraz modu³y ]>---------------------------------------//
 //-                                                                                                         -//
@@ -317,6 +319,8 @@ public OnGameModeInit()
 	//Skiny:
 	AddPlayerClass(35, -2819.9297,1134.0607,26.0766, 326.0, 0, 0, 0, 0, 0, 0);
 	AddPlayerClass(37, -2819.9297,1134.0607,26.0766, 326.0, 0, 0, 0, 0, 0, 0);
+	
+	Group_SetGlobalCommand(YCMD:l, true);
 	
 	print(">>> Wykonano. Gamemode pomyslnie uruchomiony.\n");
 	return 1;

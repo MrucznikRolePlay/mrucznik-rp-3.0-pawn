@@ -29,10 +29,10 @@
 #define TABLE_BUDYNKI 				"game_budynki"
 #define TABLE_POMIESZCZENIA 		"game_pomieszczenia"
 #define TABLE_DRZWI					"game_drzwi"
-#define TABLE_WINDY					"game_windy"
+//#define TABLE_WINDY					"game_windy"
 #define TABLE_DOMY					"game_domy"
-#define TABLE_VEHICLES_CATEGORY 	"game_pojazdy_kategorie"
-#define TABLE_VEHICLES 				"game_pojazdy"
+//#define TABLE_VEHICLES_CATEGORY 	"game_pojazdy_kategorie"
+//#define TABLE_VEHICLES 				"game_pojazdy"
 #define TABLE_FRAKCJE 				"game_frakcje"
 
 //end

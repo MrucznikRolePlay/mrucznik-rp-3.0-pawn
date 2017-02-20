@@ -74,6 +74,7 @@ stock domy_ORM(id)
 	orm_addvar_int(oid, Dom[id][ID], "ID");
 	orm_addvar_int(oid, Dom[id][Budynek], "Budynek");
 	orm_addvar_int(oid, Dom[id][Cena], "Cena");
+	orm_addvar_int(oid, Dom[id][Wlasciciel], "Cena");
 	//orm_addvar_string(oid, Dom[id][Nazwa], MAX_BUDYNEK_NAME, "Nazwa");
 	
 	orm_setkey(oid, "ID");

@@ -337,6 +337,7 @@ stock static CreateFractionORM(fraction)
 	Frakcja[fraction][ID] = fraction;
 	new ORM:id = Frakcja[fraction][ORM] = orm_create(TABLE_FRAKCJE);
 	
+	orm_addvar_int(id, Frakcja[fraction][ID], "ID");
 	orm_addvar_string(id, Frakcja[fraction][Nazwa], MAX_FRACTION_NAME, "Nazwa");
 	orm_addvar_string(id, Frakcja[fraction][Skrot], MAX_FRACTION_SKROT, "Skrot");
 	orm_addvar_string(id, Frakcja[fraction][Motto], MAX_FRACTION_MOTTO, "Motto");
@@ -349,7 +350,7 @@ stock static CreateFractionORM(fraction)
 	orm_setkey(id, "ID");
 }
 
-stock static CreateRangsORM(fraction, rang)
+stock static CreateRanksORM(fraction, rank)
 {
 	
 }

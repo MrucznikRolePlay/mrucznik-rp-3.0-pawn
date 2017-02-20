@@ -947,7 +947,7 @@ stock drzwi_ORM(id)
 	orm_addvar_float(oid, Drzwi[id][inZ], "inZ");
 	orm_addvar_float(oid, Drzwi[id][inA], "inA");
 	orm_addvar_string(oid, Drzwi[id][in3DTextString], MAX_DRZWI3D_LENGTH, "in3DText");
-	orm_addvar_int(oid, Drzwi[id][inPickupModel], "inPickup");
+	orm_addvar_int(oid, Drzwi[id][inPickupModel], "inPickupModel");
 	orm_addvar_int(oid, Drzwi[id][inPomieszczenie], "inPomieszczenie");
 	//out
 	orm_addvar_float(oid, Drzwi[id][outX], "outX");
@@ -955,7 +955,7 @@ stock drzwi_ORM(id)
 	orm_addvar_float(oid, Drzwi[id][outZ], "outZ");
 	orm_addvar_float(oid, Drzwi[id][outA], "outA");
 	orm_addvar_string(oid, Drzwi[id][out3DTextString], MAX_DRZWI3D_LENGTH, "out3DText");
-	orm_addvar_int(oid, Drzwi[id][outPickupModel], "outPickup");
+	orm_addvar_int(oid, Drzwi[id][outPickupModel], "outPickupModel");
 	orm_addvar_int(oid, Drzwi[id][outPomieszczenie], "outPomieszczenie");
 	orm_addvar_int(oid, Drzwi[id][lock], "Lock");
 	
@@ -1025,7 +1025,8 @@ stock MruMySQL_LoadBudynki()
 {
 	inline iQuery()
 	{
-		new rows = IloscBudynkow = cache_get_row_count(gMySQL);
+		new rows;
+		cache_get_row_count(rows);
 		if(rows <= MAX_BUDYNKOW)
 		{
 			for(new i; i<rows; i++)
@@ -1049,7 +1050,8 @@ stock MruMySQL_LoadPomieszczenia()
 {
 	inline iQuery()
 	{
-		new rows = IloscPomieszczen = cache_get_row_count(gMySQL);
+		new rows;
+		cache_get_row_count(rows);
 		if(rows <= MAX_POMIESZCZEN)
 		{
 			for(new i; i<rows; i++)
@@ -1073,7 +1075,8 @@ stock MruMySQL_LoadDrzwi()
 {
 	inline iQuery()
 	{
-		new rows = IloscDrzwi = cache_get_row_count(gMySQL);
+		new rows;
+		cache_get_row_count(rows);
 		if(rows <= MAX_DRZWI)
 		{
 			for(new i; i<rows; i++)

@@ -156,7 +156,7 @@ stock IsColorHex(color[])
 stock IsNickCorrect(nick[])
 {
 	new regex:nickRegex = regex_new("^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$");
-	if(regex_check(nick, nickRegex) >= 0)
+	if(regex_check(nick, nickRegex))
 	{
 		regex_delete(nickRegex); 
 		return 1;

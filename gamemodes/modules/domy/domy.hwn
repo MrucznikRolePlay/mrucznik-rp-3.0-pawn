@@ -27,7 +27,8 @@ enum eDomy
 	ORM:ORM,
 	ID,
 	Budynek,
-	Cena
+	Cena,
+	Wlasciciel
 };
 
 //-----------------<[ Zmienne: ]>-------------------
