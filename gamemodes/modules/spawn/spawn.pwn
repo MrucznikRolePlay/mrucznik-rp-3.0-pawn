@@ -1,7 +1,7 @@
-//fizjologia.pwn
+//spawn.pwn
 
 //----------------------------------------------<< Source >>-------------------------------------------------//
-//---------------------------------------[ Modu³: fizjologia.pwn ]-------------------------------------------//
+//---------------------------------------[ Modu³: spawn.pwn ]------------------------------------------//
 //Opis:
 /*
 
@@ -30,12 +30,37 @@
 //
 
 //-----------------<[ Funkcje: ]>-------------------
-fizjologia_Init()
+SetPlayerSpawn(playerid)
 {
-}
-
-stock textdraw_PasekGlodu()
-{
+	switch (PlayerInfo[playerid][pSpawn])
+	{
+		case 1:
+		{
+			if(PlayerInfo[playerid][pFrakcja] == BRAK_FRAKCJI)
+			{
+				PlayerInfo[playerid][pSpawn] = 0;
+				SetPlayerSpawn(playerid);
+			}
+			else
+				FrakcjaSpawn(playerid);
+		}
+		/*case 2:
+		{	
+			if(PlayerInfo[playerid][pOrganizacja] == BRAK_FRAKCJI)
+			{
+				PlayerInfo[playerid][pSpawn] = 0;
+				SetPlayerSpawn(playerid);
+			}
+			else
+				OrganizacjaSpawn(playerid);
+		}*/
+		default:
+		{
+			SetPlayerPos(playerid, 1173.2563, -1323.3102, 15.3943);
+			EnterPomieszczenie(playerid, 0);
+		}
+	}
+	return 1;
 }
 
 //------------------<[ MySQL: ]>--------------------

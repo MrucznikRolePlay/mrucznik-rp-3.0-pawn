@@ -82,7 +82,7 @@ stock konta_Logowanie(playerid)
 						else
 						{
 							ServerInfo(playerid, "Przekroczy³eœ dozwolon¹ iloœæ z³ych logowañ. Zostajesz wyrzucony z serwera.");
-							LoginLog(playerid, "Przekroczyl limit zlych hasel, zostal skickowany");
+							Log(LoginLog, WARNING, "%s przekroczyl limit zlych hasel ("#LOGIN_TRIES"), zostal skickowany. IP: %s", GetNick(playerid), GetIp(playerid));
 							KickEx(playerid);
 						}
 					}
@@ -210,9 +210,7 @@ CheckPassword(playerid, wpisane[])
 	}
 	else
 	{
-		new string[128];
-		format(string, sizeof(string), "Podal zle haslo z IP: %s", GetIp(playerid));
-		LoginLog(playerid, string);
+		Log(LoginLog, WARNING, "%s podal z³e has³o. IP: %s", GetNick(playerid), GetIp(playerid));
 		return 0;
 	}
 }

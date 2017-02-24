@@ -29,8 +29,9 @@
 #include <crashdetect>					// By Zeex, v4.18.1				https://github.com/Zeex/samp-plugin-crashdetect/releases
 #include <sscanf2>						// By Y_Less, 2.8.2:			http://forum.sa-mp.com/showthread.php?t=570927
 #include <Pawn.Regex>
-//--------<[ YSI ]>----------
+//--------<[ YSI ]>----------			// By Y_Less, 4.0				https://github.com/Misiur/YSI-Includes
 #include <YSI\y_iterate>
+#include <YSI\y_playerarray>		
 #include <YSI\y_commands>
 #include <YSI\y_dialog>
 #include <YSI\y_groups>
@@ -42,11 +43,13 @@
 #include <streamer>						// By Incognito, v2.8.2:		http://forum.sa-mp.com/showthread.php?t=102865
 #include <a_mysql_yinline>				// By maddinat0r, v1.0.1 		https://github.com/maddinat0r/samp-mysql-yinline-include
 #include <a_mysql>						// By BlueG, R41-2:				http://forum.sa-mp.com/showthread.php?t=56564 https://github.com/pBlueG/SA-MP-MySQL/releases
+#include <log-plugin>					// By maddinat0r v0.3: 			http://forum.sa-mp.com/showthread.php?t=603175 https://github.com/maddinat0r/samp-log
+//-------<[ Biblioteki ]>-------
+#include <callbacks>					// By _Emmet 					http://forum.sa-mp.com/showthread.php?t=490436 https://github.com/emmet-jones/New-SA-MP-callbacks
 
 //TODO:
 // By maddinat0r v1.3: https://github.com/maddinat0r/samp-tsconnector
-// By maddinat0r v0.3: https://github.com/maddinat0r/samp-log
-// By MP2: http://forum.sa-mp.com/showthread.php?p=2362690
+// Kamera By MP2: http://forum.sa-mp.com/showthread.php?p=2362690
 
 native WP_Hash(buffer[], len, const str[]);
 
@@ -102,6 +105,7 @@ forward OnPlayerLogin(playerid);
 #include "modules\prace\prace.def"
 #include "modules\interiory\interiory.def"
 #include "modules\domy\domy.def"
+#include "modules\ekonomia\ekonomia.def"
 #include "modules\biznesy\biznesy.def"
 #include "modules\textdrawy\textdrawy.def"
 #include "modules\obiekty\obiekty.def"
@@ -109,13 +113,13 @@ forward OnPlayerLogin(playerid);
 #include "modules\3dtexty\3dtexty.def"
 #include "modules\komendy\komendy.def"
 #include "modules\oferty\oferty.def"
-#include "modules\fizjologia\fizjologia.def"
 #include "modules\animacje\animacje.def"
 #include "modules\pomoc\pomoc.def"
 #include "modules\ustawienia\ustawienia.def"
 #include "modules\statystyki\statystyki.def"
 #include "modules\keybindy\keybindy.def"
 #include "modules\bw\bw.def"
+#include "modules\spawn\spawn.def"
 #include "modules\debug\debug.def"
 #include "modules\tests\tests.def"
 
@@ -144,6 +148,7 @@ forward OnPlayerLogin(playerid);
 #include "modules\prace\prace.hwn"
 #include "modules\interiory\interiory.hwn"
 #include "modules\domy\domy.hwn"
+#include "modules\ekonomia\ekonomia.hwn"
 #include "modules\biznesy\biznesy.hwn"
 #include "modules\textdrawy\textdrawy.hwn"
 #include "modules\obiekty\obiekty.hwn"
@@ -151,13 +156,13 @@ forward OnPlayerLogin(playerid);
 #include "modules\3dtexty\3dtexty.hwn"
 #include "modules\komendy\komendy.hwn"
 #include "modules\oferty\oferty.hwn"
-#include "modules\fizjologia\fizjologia.hwn"
 #include "modules\animacje\animacje.hwn"
 #include "modules\pomoc\pomoc.hwn"
 #include "modules\ustawienia\ustawienia.hwn"
 #include "modules\statystyki\statystyki.hwn"
 #include "modules\keybindy\keybindy.hwn"
 #include "modules\bw\bw.hwn"
+#include "modules\spawn\spawn.hwn"
 #include "modules\debug\debug.hwn"
 #include "modules\tests\tests.hwn"
 
@@ -186,6 +191,7 @@ forward OnPlayerLogin(playerid);
 #include "modules\prace\prace.pwn"
 #include "modules\interiory\interiory.pwn"
 #include "modules\domy\domy.pwn"
+#include "modules\ekonomia\ekonomia.pwn"
 #include "modules\biznesy\biznesy.pwn"
 #include "modules\textdrawy\textdrawy.pwn"
 #include "modules\obiekty\obiekty.pwn"
@@ -193,13 +199,13 @@ forward OnPlayerLogin(playerid);
 #include "modules\3dtexty\3dtexty.pwn"
 #include "modules\komendy\komendy.pwn"
 #include "modules\oferty\oferty.pwn"
-#include "modules\fizjologia\fizjologia.pwn"
 #include "modules\animacje\animacje.pwn"
 #include "modules\pomoc\pomoc.pwn"
 #include "modules\ustawienia\ustawienia.pwn"
 #include "modules\statystyki\statystyki.pwn"
 #include "modules\keybindy\keybindy.pwn"
 #include "modules\bw\bw.pwn"
+#include "modules\spawn\spawn.pwn"
 #include "modules\debug\debug.pwn"
 #include "modules\tests\tests.pwn"
 
@@ -304,7 +310,9 @@ public OnGameModeInit()
 	
 	//-----< £adowanie modu³ów: >------
 	print("    <<< Ladowanie modulow...");
+	logi_Init();
 	antycheat_Init();
+	admin_Init();
 	frakcje_Init();
 	organizacje_Init();
 	textdrawy_Init();
@@ -312,15 +320,15 @@ public OnGameModeInit()
 	interiory_Init();
 	texty3d_Init();
 	pickupy_Init();
-	fizjologia_Init();
 	pojazdy_Init();
+	ekonomia_Init();
+	keybindy_Init();
+	chaty_Init();
 	print("    >>> Pomyslnie zaladowano wszystkie moduly...");
 	
 	//Skiny:
 	AddPlayerClass(35, -2819.9297,1134.0607,26.0766, 326.0, 0, 0, 0, 0, 0, 0);
 	AddPlayerClass(37, -2819.9297,1134.0607,26.0766, 326.0, 0, 0, 0, 0, 0, 0);
-	
-	Group_SetGlobalCommand(YCMD:l, true);
 	
 	print(">>> Wykonano. Gamemode pomyslnie uruchomiony.\n");
 	return 1;
@@ -339,6 +347,7 @@ public OnGameModeExit()
 	pojazdy_Exit();
 	
 	MruMySQL_Exit();
+	logi_Exit();
 	
     print(">>> Wykonano. Gamemode pomyslnie wylaczony.");
 	return 1;
@@ -352,6 +361,10 @@ public OnPlayerRequestClass(playerid, classid)
 
 public OnPlayerConnect(playerid)
 {
+	#if DEBUG_MODE > 0
+	OnPlayerLogin(playerid);
+	#endif
+
 	new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, MAX_PLAYER_NAME); //pobieranie nicku
 	GetPlayerName(playerid, PlayerInfo[playerid][pNick], MAX_PLAYER_NAME); //pobieranie nicku
@@ -430,39 +443,6 @@ public OnPlayerSpawn(playerid)
 	else
 	{
 		return 0;
-	}
-	return 1;
-}
-
-SetPlayerSpawn(playerid)
-{
-	switch (PlayerInfo[playerid][pSpawn])
-	{
-		case 1:
-		{
-			if(PlayerInfo[playerid][pFrakcja] == BRAK_FRAKCJI)
-			{
-				PlayerInfo[playerid][pSpawn] = 0;
-				SetPlayerSpawn(playerid);
-			}
-			else
-				FrakcjaSpawn(playerid);
-		}
-		/*case 2:
-		{	
-			if(PlayerInfo[playerid][pOrganizacja] == BRAK_FRAKCJI)
-			{
-				PlayerInfo[playerid][pSpawn] = 0;
-				SetPlayerSpawn(playerid);
-			}
-			else
-				OrganizacjaSpawn(playerid);
-		}*/
-		default:
-		{
-			SetPlayerPos(playerid, 1173.2563, -1323.3102, 15.3943);
-			EnterPomieszczenie(playerid, 0);
-		}
 	}
 	return 1;
 }
@@ -789,8 +769,7 @@ public OnPlayerRegister(playerid)
 	new string[128];
 	
 	ServerInfo(playerid, "Zarejestrowa³eœ siê");
-	format(string, sizeof(string), "Zarejestrowal sie poprawnie z IP: %s", GetIp(playerid));
-	LoginLog(playerid, string);
+	Log(LoginLog, INFO, "%s (UID: %d) zarejestrowal sie poprawnie z IP: %s", GetNick(playerid), PlayerInfo[playerid][pUID], GetIp(playerid));
 	
 	LoginPlayer(playerid);
 	return 1;
@@ -801,8 +780,7 @@ public OnPlayerLogin(playerid)
 	new string[128];
 	
 	ServerInfo(playerid, "Zalogowa³eœ siê!");
-	format(string, sizeof(string), "Zalogowal sie poprawnie z IP: %s", GetIp(playerid));
-	LoginLog(playerid, string);
+	Log(LoginLog, INFO, "%s (UID: %d) zalogowa³ sie poprawnie z IP: %s", GetNick(playerid), PlayerInfo[playerid][pUID], GetIp(playerid));
 	
 	LoginPlayer(playerid);
 	return 1;

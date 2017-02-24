@@ -22,7 +22,23 @@
 //
 
 //------------------<[ Enumy: ]>--------------------
+enum eAdminLevel
+{
+	ADMIN_1L,
+	ADMIN_2L,
+	ADMIN_3L,
+	ADMIN_4L,
+	ADMIN_5L,
+	ADMIN_SENIOR,
+	ADMIN_VH@,
+	ADMIN_H@,
+	ADMIN_U1,
+	ADMIN_U2,
+	ADMIN_UH@
+}
+
 //-----------------<[ Zmienne: ]>-------------------
+new Group:gAdmin[eAdminLevel];
 //------------------<[ Forwardy: ]>--------------------
 
 //end

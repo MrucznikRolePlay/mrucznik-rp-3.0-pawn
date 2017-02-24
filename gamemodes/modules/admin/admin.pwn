@@ -30,8 +30,18 @@
 //
 
 //-----------------<[ Funkcje: ]>-------------------
+admin_Init()
+{
+	admin_LoadCommands();
+}
+
 //------------------<[ MySQL: ]>--------------------
 //-----------------<[ Komendy: ]>-------------------
+admin_LoadCommands()
+{
+
+}
+
 YCMD:messagecolor(playerid, params[], help)
 {
 	new color, string[512];
@@ -137,11 +147,11 @@ YCMD:setstat(playerid, params[], help)
 			{
 				case _H<lvl>: 				PlayerInfo[giveplayerid][pLevel] = set;
 				case _H<hajs>:				PlayerInfo[giveplayerid][pHajs] = set;
-				case _H<frakcja>:			Przyjmij(giveplayerid, set);
+				case _H<frakcja>:			if(set < 0) FrakcjaZwolnij(giveplayerid); else FrakcjaPrzyjmij(giveplayerid, set);
 				case _H<org>:				PlayerInfo[giveplayerid][pOrganizacja] = set;
 				case _H<honline>:			PlayerInfo[giveplayerid][pOnline] = set;
 				case _H<spawn>:				PlayerInfo[giveplayerid][pSpawn] = set;
-				case _H<ranga>:				PlayerInfo[giveplayerid][pRanga] = set;
+				case _H<ranga>:				FrakcjaUstawRange(giveplayerid, set);
 				case _H<praca>:				PlayerInfo[giveplayerid][pPraca] = set;
 				case _H<wl>:				PlayerInfo[giveplayerid][pWL] = set;
 				default: goto goto_setstat;

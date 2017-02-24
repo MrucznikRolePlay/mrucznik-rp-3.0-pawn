@@ -55,11 +55,13 @@ public OnPlayerEnterDoor(playerid, doorid)
 //-----------------<[ Funkcje: ]>-------------------
 stock interiory_Init()
 {
-	MruMySQL_LoadBudynki();
-	MruMySQL_LoadPomieszczenia();
-	MruMySQL_LoadDrzwi();
-	//MruMySQL_LoadWindy();
+	interiory_LoadBudynki();
+	interiory_LoadPomieszczenia();
+	interiory_LoadDrzwi();
+	//interiory_LoadWindy();
 	StworzRelacje();
+	
+	interiory_LoadCommands();
 	return 1;
 }
 
@@ -175,7 +177,7 @@ stock PanelBudynkow(playerid, domy)
 										}
 										case 10://Usuñ drzwi
 										{
-											MruMySQL_DeleteDrzwi(drzwiID);
+											interiory_DeleteDrzwi(drzwiID);
 											ServerInfoF(playerid, "Drzwi %d usuniête", drzwiID);
 										}
 									}
@@ -296,7 +298,7 @@ stock PanelBudynkow(playerid, domy)
 										Dialog_ShowCallback(playerid, using inline iDialog4, DIALOG_STYLE_LIST, ListaPomieszczenNaglowek(budynekID, pomieszczenieID, " -> powiazane drzwi"), ListaDrzwi(pomieszczenieID), "Wybierz", "Wróæ");
 										if(changedD==true)
 										{
-											MruMySQL_SaveDrzwi(changedD);
+											interiory_SaveDrzwi(changedD);
 											changedD=false;
 										}
 									}
@@ -344,7 +346,7 @@ stock PanelBudynkow(playerid, domy)
 							}
 							else if(listitem3 == 2)//Usuñ pomieszczenie - zatwierdzone
 							{
-								MruMySQL_DeletePomieszczenie(pomieszczenieID);
+								interiory_DeletePomieszczenie(pomieszczenieID);
 								Dialog_ShowCallback(playerid, using inline iDialog2, DIALOG_STYLE_LIST, ListaBudynkowNaglowek(budynekID, " -> powi¹zane pomieszczenia"), ListaPomieszczen(budynekID), "Wybierz", "Wróæ");
 							}
 							
@@ -433,7 +435,7 @@ stock PanelBudynkow(playerid, domy)
 								Dialog_ShowCallback(playerid, using inline iDialog2, DIALOG_STYLE_LIST, ListaBudynkowNaglowek(budynekID, " -> powi¹zane pomieszczenia"), ListaPomieszczen(budynekID), "Wybierz", "Wróæ");
 								if(changedP==true)
 								{
-									MruMySQL_SavePomieszczenie(pomieszczenieID);
+									interiory_SavePomieszczenie(pomieszczenieID);
 									changedP=false;
 								}
 							}
@@ -475,7 +477,7 @@ stock PanelBudynkow(playerid, domy)
 						}
 						case 2://Potwierdzenie usuniêcia
 						{
-							MruMySQL_DeleteBudynek(budynekID);
+							interiory_DeleteBudynek(budynekID);
 							Dialog_ShowCallback(playerid, using inline iDialog0, DIALOG_STYLE_LIST, "Zarz¹dzanie budynkami", ListaBudynkow(domy), "Wybierz", "WyjdŸ");
 						}
 					}
@@ -485,7 +487,7 @@ stock PanelBudynkow(playerid, domy)
 					Dialog_ShowCallback(playerid, using inline iDialog1, DIALOG_STYLE_LIST, ListaBudynkowNaglowek(budynekID, "."), "Edytuj\nPowi¹zane pomieszczenia\nUsuñ", "Wybierz", "Wróæ");
 					if(changedB==true)
 					{
-						MruMySQL_SaveBudynek(budynekID);
+						interiory_SaveBudynek(budynekID);
 						changedB=false;
 					}
 				}
@@ -761,7 +763,7 @@ stock StworzBudynek(id, nazwa[], typ, wlasciciel, vw, playerid=-1)
 	Budynki[id][VW] = vw;
 	
 	budynki_ORM(id);
-	MruMySQL_CreateBudynek(id, playerid);
+	interiory_CreateBudynek(id, playerid);
 	return id;
 }
 
@@ -775,7 +777,7 @@ stock StworzPomieszczenie(id, nazwa[], budynek, interior, czas, pogoda, muzyka[]
 	format(Pomieszczenia[id][Muzyka], MAX_STREAM_LENGTH, muzyka);
 	
 	pomieszczenia_ORM(id);
-	MruMySQL_CreatePomieszczenie(id, playerid);
+	interiory_CreatePomieszczenie(id, playerid);
 	return id;
 }
 
@@ -801,7 +803,7 @@ stock StworzDrzwi(id, nazwa[], Float:ix, Float:iy, Float:iz, Float:ia, itext3d[]
 	
 	drzwi_ORM(id);
 	drzwi_Create(id);
-	MruMySQL_CreateDrzwi(id, playerid);
+	interiory_CreateDrzwi(id, playerid);
 	return id;
 }
 
@@ -1021,7 +1023,7 @@ stock StworzRelacje(type=0, id=0)
 	return 1;
 }
 
-stock MruMySQL_LoadBudynki()
+stock interiory_LoadBudynki()
 {
 	inline iQuery()
 	{
@@ -1038,7 +1040,7 @@ stock MruMySQL_LoadBudynki()
 		}
 		else
 		{
-			Error("interiory", "MruMySQL_LoadBudynki()", "Ilosc zaladowanych budynkow wieksza niz maksymalna liczba budynkow.");
+			Error("interiory", "interiory_LoadBudynki()", "Ilosc zaladowanych budynkow wieksza niz maksymalna liczba budynkow.");
 			return 1;
 		}
 	}
@@ -1046,7 +1048,7 @@ stock MruMySQL_LoadBudynki()
 	return 1;
 }
 
-stock MruMySQL_LoadPomieszczenia()
+stock interiory_LoadPomieszczenia()
 {
 	inline iQuery()
 	{
@@ -1063,7 +1065,7 @@ stock MruMySQL_LoadPomieszczenia()
 		}
 		else
 		{
-			Error("interiory", "MruMySQL_LoadPomieszczenia()", "Ilosc zaladowanych pomieszczen wieksza niz maksymalna liczba pomieszczen.");
+			Error("interiory", "interiory_LoadPomieszczenia()", "Ilosc zaladowanych pomieszczen wieksza niz maksymalna liczba pomieszczen.");
 			return 1;
 		}
 	}
@@ -1071,7 +1073,7 @@ stock MruMySQL_LoadPomieszczenia()
 	return 1;
 }
 
-stock MruMySQL_LoadDrzwi()
+stock interiory_LoadDrzwi()
 {
 	inline iQuery()
 	{
@@ -1089,7 +1091,7 @@ stock MruMySQL_LoadDrzwi()
 		}
 		else
 		{
-			Error("interiory", "MruMySQL_LoadDrzwi()", "Ilosc zaladowanych drzwi wieksza niz maksymalna liczba drzwi.");
+			Error("interiory", "interiory_LoadDrzwi()", "Ilosc zaladowanych drzwi wieksza niz maksymalna liczba drzwi.");
 			return 1;
 		}
 	}
@@ -1097,45 +1099,22 @@ stock MruMySQL_LoadDrzwi()
 	return 1;
 }
 
-/*stock MruMySQL_LoadWindy()
-{
-	inline iQuery()
-	{
-		new rows = cache_get_row_count(gMySQL);
-		if(rows <= MAX_WIND)
-		{
-			for(new i; i<rows; i++)
-			{
-				
-			}
-			printf("MySQL: Poprawnie zaladowano %d rekordow informacji o windy z tabeli "TABLE_WINDY, rows);
-		}
-		else
-		{
-			Error("interiory", "MruMySQL_LoadWindy()", "Ilosc zaladowanych wind wieksza niz maksymalna liczba wind.");
-			return 1;
-		}
-	}
-	mysql_pquery_inline(gMySQL, "SELECT * FROM `"TABLE_WINDY"` ORDER BY `ID` ASC", using inline iQuery, "");
-	return 1;
-}*/
-
-stock MruMySQL_SaveBudynek(id)
+stock interiory_SaveBudynek(id)
 {
 	orm_update(Budynki[id][ORM]); 
 }
 
-stock MruMySQL_SavePomieszczenie(id)
+stock interiory_SavePomieszczenie(id)
 {
 	orm_update(Pomieszczenia[id][ORM]); 
 }
 
-stock MruMySQL_SaveDrzwi(id)
+stock interiory_SaveDrzwi(id)
 {
 	orm_update(Drzwi[id][ORM]); 
 }
 
-stock MruMySQL_CreateBudynek(id, playerid=-1)
+stock interiory_CreateBudynek(id, playerid=-1)
 {
 	inline Query()
 	{
@@ -1146,7 +1125,7 @@ stock MruMySQL_CreateBudynek(id, playerid=-1)
 	orm_insert_inline(Budynki[id][ORM], using inline Query, ""); 
 }
 
-stock MruMySQL_CreatePomieszczenie(id, playerid=-1)
+stock interiory_CreatePomieszczenie(id, playerid=-1)
 {
 	inline Query()
 	{
@@ -1158,7 +1137,7 @@ stock MruMySQL_CreatePomieszczenie(id, playerid=-1)
 	orm_insert_inline(Pomieszczenia[id][ORM], using inline Query, ""); 
 }
 
-stock MruMySQL_CreateDrzwi(id, playerid=-1)
+stock interiory_CreateDrzwi(id, playerid=-1)
 {
 	inline Query()
 	{
@@ -1170,7 +1149,7 @@ stock MruMySQL_CreateDrzwi(id, playerid=-1)
 	orm_insert_inline(Drzwi[id][ORM], using inline Query, ""); 
 }
 
-stock MruMySQL_DeleteBudynek(id)
+stock interiory_DeleteBudynek(id)
 {
 	/*new query[1024];
 	format(query, sizeof(query), "DELETE FROM `"TABLE_DRZWI"` WHERE `inPomieszczenie` IN (SELECT `ID` FROM `"TABLE_POMIESZCZENIA"` WHERE `Budynek`='%d';", Budynki[id][ID]);
@@ -1190,7 +1169,7 @@ stock MruMySQL_DeleteBudynek(id)
 	return 1;
 }
 
-stock MruMySQL_DeletePomieszczenie(id)
+stock interiory_DeletePomieszczenie(id)
 {
 	/*new query[128];
 	format(query, sizeof(query), "DELETE FROM `"TABLE_POMIESZCZENIA"` WHERE `ID` = %d", Pomieszczenia[id][ID]);
@@ -1199,7 +1178,7 @@ stock MruMySQL_DeletePomieszczenie(id)
 	return 1;
 }
 
-stock MruMySQL_DeleteDrzwi(id)
+stock interiory_DeleteDrzwi(id)
 {
 	/*new query[128];
 	format(query, sizeof(query), "DELETE FROM `"TABLE_DRZWI"` WHERE `ID` = %d", Drzwi[id][ID]);
@@ -1209,6 +1188,24 @@ stock MruMySQL_DeleteDrzwi(id)
 }
 
 //-----------------<[ Komendy: ]>-------------------
+interiory_LoadCommands()
+{
+	Command_AddAlt(YCMD:interiory, "interiors");
+	Group_SetCommand(LoggedPlayers, YCMD:interiory, true);
+	
+	Command_AddAlt(YCMD:stworzbudynek, "createbuilding");
+	Group_SetCommand(LoggedPlayers, YCMD:stworzbudynek, true);
+	
+	Command_AddAlt(YCMD:stworzpomieszczenie, "createinterior");
+	Group_SetCommand(LoggedPlayers, YCMD:stworzpomieszczenie, true);
+	
+	Command_AddAlt(YCMD:stworzdrzwi, "createdoor");
+	Group_SetCommand(LoggedPlayers, YCMD:stworzdrzwi, true);
+	
+	Command_AddAlt(YCMD:wejdz, "enter");
+	Group_SetCommand(LoggedPlayers, YCMD:wejdz, true);
+}
+
 YCMD:interiory(playerid, params[], help)
 {
 	if(help)
@@ -1302,7 +1299,7 @@ YCMD:wejdz(playerid, params[], help)
 {
 	if(help)
 	{
-		//Pomoc
+		CMDInfo(playerid, "[POMOC] Komenda s³u¿y do wchodzenia/wychodzenia z pomieszczeñ/budynków."); //Pomoc
 		return 1;
 	}
 	

@@ -23,6 +23,13 @@
 
 //------------------<[ Enumy: ]>--------------------
 //-----------------<[ Zmienne: ]>-------------------
+new Logger:MainLog;
+new Logger:PWLog;
+new Logger:ChatLog;
+new Logger:LoginLog;
+new Logger:PayLog;
+new Logger:AdminChatLog;
+new Logger:AdminCommandLog;
 //------------------<[ Forwardy: ]>--------------------
 
 //end

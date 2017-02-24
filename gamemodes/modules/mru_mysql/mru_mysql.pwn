@@ -78,7 +78,7 @@ MruMySQL_Connect() //OnGameModeInit
 	INI_Load("MySQL/mysql_connect.ini");
 
 	//Logi MySQL
-	#if DEBUG_MODE==1
+	#if DEBUG_MODE==2
 		mysql_log(ALL); // debug
 	#else
 		mysql_log(ERROR | WARNING); // release

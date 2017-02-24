@@ -131,44 +131,54 @@ FrakcjaSpawn(playerid)
 }
 
 //---<[ Lider ]>---
-stock Przyjmij(playerid, frakcja)
+stock FrakcjaPrzyjmij(playerid, frakcja)
 {
+	if(frakcja < 0 || frakcja >= ILOSC_FRAKCJI) 
+		return 0;
 	PlayerInfo[playerid][pFrakcja] = frakcja;
 	PlayerInfo[playerid][pRanga] = 0;
 	AddPlayerToFractionGroup(playerid, frakcja);
 	AddToFractionRankGroup(playerid, frakcja, 0);
+	return 1;
 }
 
-stock Zwolnij(playerid)
+stock FrakcjaZwolnij(playerid)
 {
 	RemovePlayerFromFractionGroup(playerid, PlayerInfo[playerid][pFrakcja]);
 	PlayerInfo[playerid][pFrakcja] = BRAK_FRAKCJI;
 	ClearPlayerFractionRankGroup(playerid);
 	PlayerInfo[playerid][pRanga] = -1;
+	return 1;
 }
 
-stock Awansuj(playerid)
+stock FrakcjaAwansuj(playerid)
 {
+	if(PlayerInfo[playerid][pRanga]+1 >= ILOSC_RANG)
+		return 0;
 	PlayerInfo[playerid][pRanga] += 1;
 	AddToFractionRankGroup(playerid, PlayerInfo[playerid][pFrakcja], PlayerInfo[playerid][pRanga]);
+	return 1;
 }
 
-stock Degraduj(playerid)
+stock FrakcjaDegraduj(playerid)
 {
 	RemoveFromFractionRankGroup(playerid, PlayerInfo[playerid][pFrakcja], PlayerInfo[playerid][pRanga]);
 	PlayerInfo[playerid][pRanga] -= 1;
 	if(PlayerInfo[playerid][pRanga] < 0)
 	{
-		Zwolnij(playerid);
+		FrakcjaZwolnij(playerid);
 		return 0;
 	}
 	return 1;
 }
 
-stock UstawRange(playerid, ranga)
+stock FrakcjaUstawRange(playerid, ranga)
 {
+	if(ranga < 0 || ranga >= ILOSC_RANG)
+		return 0;
 	PlayerInfo[playerid][pRanga] = ranga;
 	PlayerFractionRankGroupInit(playerid);
+	return 1;
 }
 
 stock LiderPanel(playerid)
@@ -423,7 +433,7 @@ YCMD:przyjmij(playerid, params[], help)
 	{
 		if(PlayerInfo[giveplayerid][pFrakcja] == BRAK_FRAKCJI)
 		{
-			Przyjmij(giveplayerid, PlayerInfo[playerid][pFrakcja]);
+			FrakcjaPrzyjmij(giveplayerid, PlayerInfo[playerid][pFrakcja]);
 			ServerInfoF(playerid, "Przyj¹³eœ do frakcji %s", GetNick(playerid));
 			ServerInfoF(giveplayerid, "Zosta³eœ przyjêty do frakcji przez %s", GetNick(giveplayerid));
 		}
@@ -450,7 +460,7 @@ YCMD:zwolnij(playerid, params[], help)
 	{
 		if(PlayerInfo[playerid][pFrakcja] == PlayerInfo[giveplayerid][pFrakcja])
 		{
-			Zwolnij(giveplayerid);
+			FrakcjaZwolnij(giveplayerid);
 			ServerInfoF(playerid, "Zwolni³eœ z frakcji %s", GetNick(giveplayerid));
 			ServerInfoF(giveplayerid, "Zosta³eœ zwolniony z frakcji przez %s", GetNick(playerid));
 		}
@@ -473,7 +483,7 @@ YCMD:awans(playerid, params[], help)
 	{
 		if(PlayerInfo[playerid][pFrakcja] == PlayerInfo[giveplayerid][pFrakcja])
 		{
-			Awansuj(giveplayerid);
+			FrakcjaAwansuj(giveplayerid);
 			ServerGoodInfoF(giveplayerid, "Gratulacje! Dosta³eœ awans na %d rangê od swojego lidera %s.", PlayerInfo[playerid][pRanga], GetNick(playerid));
 			ServerInfoF(playerid, "Awansowa³eœ %s na %d rangê.", GetNick(giveplayerid), PlayerInfo[playerid][pRanga]);
 		}
@@ -496,7 +506,7 @@ YCMD:degraduj(playerid, params[], help)
 	{
 		if(PlayerInfo[playerid][pFrakcja] == PlayerInfo[giveplayerid][pFrakcja])
 		{
-			new zdegradowany = Degraduj(giveplayerid);
+			new zdegradowany = FrakcjaDegraduj(giveplayerid);
 			if(zdegradowany)
 			{
 				ServerBadInfoF(giveplayerid, "WsytdŸ siê! Dosta³eœ degradacjê na %d rangê od swojego lidera %s.", PlayerInfo[playerid][pRanga], GetNick(playerid));
@@ -527,7 +537,7 @@ YCMD:dajrange(playerid, params[], help)
 	{
 		if(PlayerInfo[playerid][pFrakcja] == PlayerInfo[giveplayerid][pFrakcja])
 		{
-			UstawRange(giveplayerid, ranga);
+			FrakcjaUstawRange(giveplayerid, ranga);
 			ServerInfoF(giveplayerid, "Twój lider %s nada³ ci %d rangê.", GetNick(playerid), ranga);
 			ServerInfoF(playerid, "Da³eœ %s rangê %d.", GetNick(giveplayerid), ranga);
 		}

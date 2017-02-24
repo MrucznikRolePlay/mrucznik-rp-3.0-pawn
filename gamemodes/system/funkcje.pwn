@@ -165,6 +165,20 @@ stock IsNickCorrect(nick[])
 	return 0;
 }
 
+stock CheckRange(from, to, zmienna)
+{
+	if(zmienna < from || zmienna > to)
+		return 0;
+	return 1;
+}
+
+stock CheckRangeFloat(Float:from, Float:to, Float:zmienna)
+{
+	if(zmienna < from || zmienna > to)
+		return 0;
+	return 1;
+}
+
 //----------------------------------[Skróty:]-----------------------------------
 stock SetMapNameText(text[])
 {
@@ -417,7 +431,7 @@ stock Float:GetDistanceBetweenPlayers(playerid1, playerid2)
 
 stock GetClosestPlayer(playerid)
 {
-	new Float:x, Float:y, Float:z, Float:distance=99999.0, Float:compare, playerid2;
+	new Float:x, Float:y, Float:z, Float:distance=99999.0, Float:compare, playerid2 = INVALID_PLAYER_ID;
 	GetPlayerPos(playerid, x, y, z);
 	foreach(new i : StreamedPlayers[playerid])
 	{

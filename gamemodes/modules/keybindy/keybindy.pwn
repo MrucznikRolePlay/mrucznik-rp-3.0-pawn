@@ -30,7 +30,10 @@
 //
 
 //-----------------<[ Funkcje: ]>-------------------
-
+keybindy_Init()
+{
+	keybindy_LoadCommands();
+}
 
 // ----[ Dialogi ]----
 PanelKeybindow(playerid)
@@ -364,11 +367,19 @@ ZamienZnalezioneBindy(playerid, text[])
 		else if(bufor[znajdz+1]=='G')
 		{
 			new nick[MAX_PLAYER_NAME];
-			GetPlayerName(GetClosestPlayer(playerid), nick, sizeof(nick));
-			strdel(bufor, znajdz, znajdz+2);
-			strins(bufor, nick, znajdz);
+			new giveplayerid = GetClosestPlayer(playerid);
+			if(giveplayerid != INVALID_PLAYER_ID)
+			{
+				GetPlayerName(giveplayerid, nick, sizeof(nick));
+				strdel(bufor, znajdz, znajdz+2);
+				strins(bufor, nick, znajdz);
 			
-			znajdz = znajdz-2+strlen(nick);
+				znajdz = znajdz-2+strlen(nick);
+			}
+			else
+			{
+				znajdz+=2;
+			}
 		}
 	}
 	return bufor;
@@ -376,6 +387,23 @@ ZamienZnalezioneBindy(playerid, text[])
 
 //------------------<[ MySQL: ]>--------------------
 //-----------------<[ Komendy: ]>-------------------
+keybindy_LoadCommands()
+{
+	Command_AddAlt(YCMD:keybindy, "keybind");
+	Group_SetCommand(LoggedPlayers, YCMD:keybindy, true);
+	
+	Group_SetCommand(LoggedPlayers, YCMD:0, true);
+	Group_SetCommand(LoggedPlayers, YCMD:1, true);
+	Group_SetCommand(LoggedPlayers, YCMD:2, true);
+	Group_SetCommand(LoggedPlayers, YCMD:3, true);
+	Group_SetCommand(LoggedPlayers, YCMD:4, true);
+	Group_SetCommand(LoggedPlayers, YCMD:5, true);
+	Group_SetCommand(LoggedPlayers, YCMD:6, true);
+	Group_SetCommand(LoggedPlayers, YCMD:7, true);
+	Group_SetCommand(LoggedPlayers, YCMD:8, true);
+	Group_SetCommand(LoggedPlayers, YCMD:9, true);
+}
+
 YCMD:keybindy(playerid, params[], help) //keybind, bindy, bind
 {
 	if(help)
