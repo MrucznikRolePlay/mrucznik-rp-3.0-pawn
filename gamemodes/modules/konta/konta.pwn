@@ -260,6 +260,8 @@ stock static CreateORM(playerid)
 	
 	//Przywileje:
 	orm_addvar_int(id, PlayerInfo[playerid][pAdmin], "Admin");
+	orm_addvar_int(id, PlayerInfo[playerid][pPolAdmin], "PolAdmin");
+	orm_addvar_int(id, PlayerInfo[playerid][pZaufanyGracz], "ZaufanyGracz");
 	
 	//Przestêpstwa
 	orm_addvar_int(id, PlayerInfo[playerid][pWL], "WantedLevel");
@@ -310,7 +312,6 @@ stock konta_LoadAccount(playerid)
 {
 	inline Load()
 	{
-		ServerInfoF(playerid, "Poprawnie za³adowano i zalagowano konto, UID: %d", PlayerInfo[playerid][pUID]);
 		OnPlayerLogin(playerid);
 	}
 	orm_select_inline(PlayerInfo[playerid][pORM], using inline Load, "");

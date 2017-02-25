@@ -22,23 +22,109 @@
 //
 
 //------------------<[ Enumy: ]>--------------------
+enum eZaufanyLevel
+{
+	ZAUFANY_1L,	//ZG>=1
+	ZAUFANY_2L, //ZG>=2
+	ZAUFANY_3L, //ZG>=3
+	ZAUFANY_4L, //ZG>=4
+	ZAUFANY_5L, //ZG>=5
+	ZAUFANY_6L, //ZG>=6
+	ZAUFANY_7L, //ZG>=7
+	ZAUFANY_8L, //ZG>=8
+	ZAUFANY_9L, //ZG>=9
+	ZAUFANY_10L //ZG>=10
+};
+
+enum ePolAdminLevel
+{
+	POLADMIN_1L, //P@>=1
+	POLADMIN_2L, //P@>=2
+	POLADMIN_3L	 //P@>=3
+};
+
+enum eSpecialAdmin
+{
+	UKRYTY_POLADMIN, //P@==4
+	UKRYTY_ADMIN, //@==7
+	UKRYTY_H@, //@==5555
+	SKRYPTER //P@==5
+};
+
 enum eAdminLevel
 {
-	ADMIN_1L,
-	ADMIN_2L,
-	ADMIN_3L,
-	ADMIN_4L,
-	ADMIN_5L,
-	ADMIN_SENIOR,
-	ADMIN_VH@,
-	ADMIN_H@,
-	ADMIN_U1,
-	ADMIN_U2,
-	ADMIN_UH@
-}
+	ADMIN_1L, 	//>=1
+	ADMIN_2L, 	//>=5
+	ADMIN_3L, 	//>=10
+	ADMIN_4L,	//>=15
+	ADMIN_5L, 	//>=20
+	ADMIN_6L, 	//>=25
+	ADMIN_7L, 	//>=35
+	ADMIN_8L,	//>=100
+	ADMIN_9L,	//>=200
+	ADMIN_10L,	//>=1000
+	ADMIN_VH@,	//>=2000
+	ADMIN_H@	//==5000
+};
 
 //-----------------<[ Zmienne: ]>-------------------
+new Group:gZaufanyGracz[eZaufanyLevel];
+new Group:gPolAdmin[ePolAdminLevel];
 new Group:gAdmin[eAdminLevel];
-//------------------<[ Forwardy: ]>--------------------
+new Group:gSpecialAdmin[eSpecialAdmin];
+new Group:gRcornista;
+
+//------------------<[ Tablice: ]>--------------------
+new gZaufanyGraczName[eZaufanyLevel][32] = {
+	"Zaufany Gracz 1",//ZAUFANY_1L
+	"Zaufany Gracz 2",//ZAUFANY_2L
+	"Zaufany Gracz 3",//ZAUFANY_3L
+	"Zaufany Gracz 4",//ZAUFANY_4L
+	"Zaufany Gracz 5",//ZAUFANY_5L
+	"Zaufany Gracz 6",//ZAUFANY_6L
+	"Zaufany Gracz 7",//ZAUFANY_7L
+	"Zaufany Gracz 8",//ZAUFANY_8L
+	"Zaufany Gracz 9",//ZAUFANY_9L
+	"Zaufany Gracz 10"//ZAUFANY_10L
+};
+new gPolAdminName[ePolAdminLevel][32] = {
+	"Pó³ Admin 1",//P@>=1
+	"Pó³ Admin 2",//P@>=2
+	"Pó³ Admin 3"//P@>=3
+};
+new gAdminName[eAdminLevel][32] = {
+	"Admin 1",//ADMIN_1L
+	"Admin 2",//ADMIN_2L
+	"Admin 3",//ADMIN_3L
+	"Admin 4",//ADMIN_4L
+	"Admin 5",//ADMIN_5L
+	"Admin 6",//ADMIN_6L
+	"Admin 7",//ADMIN_7L
+	"Admin 8",//ADMIN_8L
+	"Admin 9",//ADMIN_9L
+	"Admin 10",//ADMIN_10L
+	"Vice Head Admin",//ADMIN_VH@
+	"Head Admin"//ADMIN_H@
+};
+new gSpecialAdminName[eSpecialAdmin][32] = {
+	"Ukryty Pó³Admin",//UKRYTY_POLADMIN
+	"Ukryty Admin",//UKRYTY_ADMIN
+	"Ukryty Head Admin",//UKRYTY_H@
+	"Skrypter"//SKRYPTER
+};
+new gAdminAssignLevels[eAdminLevel] = {
+	1, 
+	5,
+	10,
+	15,
+	20,
+	25,
+	35,
+	100,
+	200,
+	1000,
+	2000,
+	5000,
+};
 
 //end

@@ -105,5 +105,6 @@ new Group:LoggedPlayers; //gracze online
 new Iterator:StreamedPlayers[MAX_PLAYERS]<MAX_PLAYERS>; //gracze zestreamowanie dla gracza
 
 //------------------<[ Zmienne: ]>-------------------
+new gPogoda = 10;
 
 //end

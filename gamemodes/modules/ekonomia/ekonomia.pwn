@@ -66,38 +66,39 @@ YCMD:plac(playerid, params[], help)
 	else
 	{
 		//Cia³o komendy:
-		if(IsPlayerLogged(giveplayerid))
+		if(playerid == giveplayerid)
 		{
-			if(hajs <= 5000 && hajs > 0)
-			{
-				if(IsPlayerInRangeToPlayer(playerid, giveplayerid))
-				{
-					new player[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME], string[64];
-					GetPlayerName(playerid, player, sizeof(player));
-					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
-					GivePlayerMoney(playerid, -hajs);
-					GivePlayerMoney(giveplayerid, hajs);
-					PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-					ServerInfoF(playerid, "Da³eœ %d$ graczowi %s", hajs, giveplayer);
-					ServerInfoF(giveplayerid, "Otrzyma³eœ %d$ od gracza %s", hajs, player);
-					format(string, sizeof(string), "wyci¹ga pieni¹dze i daje je %s.", giveplayer);
-					Me(playerid, string);
-					Log(PayLog, INFO, "da³ %s kwotê %d$", giveplayer, hajs);
-				}
-				else
-				{
-					ServerFail(playerid, "Ten gracz jest za daleko, podejdŸ bli¿ej.");
-				}
-			}
-			else
-			{
-				ServerFail(playerid, "T¹ komend¹ nie mo¿esz p³aciæ wiêcej ni¿ 5000$. U¿yj /teczka!");
-			}
+			ServerFail(playerid, "P³acenie samemu sobie nie wydaje siê dobrym pomys³em ;) Czy na pewno taki by³ twój zamiar?");
+			return 1;
 		}
-		else
+		if(!IsPlayerLogged(giveplayerid))
 		{
-			ServerFailF(playerid, "Na serwerze nie ma gracza o podanym Nicku/ID (%d).", giveplayerid);
+			ServerFail(playerid, "Na serwerze nie ma gracza o podanym Nicku/ID");
+			return 1;
 		}
+		if(hajs <= 5000 && hajs > 0)
+		{
+			ServerFail(playerid, "T¹ komend¹ nie mo¿esz p³aciæ wiêcej ni¿ 5000$. U¿yj /teczka!");
+			return 1;
+		}
+		if(IsPlayerInRangeToPlayer(playerid, giveplayerid))
+		{
+			ServerFail(playerid, "Ten gracz jest za daleko od tego gracza, podejdŸ bli¿ej.");
+			return 1;
+		}
+		
+		new player[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME], string[64];
+		GetPlayerName(playerid, player, sizeof(player));
+		GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
+		GivePlayerMoney(playerid, -hajs);
+		GivePlayerMoney(giveplayerid, hajs);
+		PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
+		ServerInfoF(playerid, "Da³eœ %d$ graczowi %s", hajs, giveplayer);
+		ServerInfoF(giveplayerid, "Otrzyma³eœ %d$ od gracza %s", hajs, player);
+		format(string, sizeof(string), "wyci¹ga pieni¹dze i daje je %s.", giveplayer);
+		Me(playerid, string);
+		Log(PayLog, INFO, "da³ %s kwotê %d$", giveplayer, hajs);
+		
 		return 1;
 	}
 }

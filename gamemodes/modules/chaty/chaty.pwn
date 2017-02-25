@@ -311,9 +311,9 @@ chaty_LoadCommands()
 
 YCMD:l(playerid, params[], help)
 { //chat
-    if ( help ) return SendClientMessage(playerid, -1, "[POMOC] Podstawowy czat IC (mowa postaci).");
+    if ( help ) return CMDHelp(playerid, "Podstawowy czat IC (mowa postaci).");
 	
-	if (isnull(params)) return SendClientMessage(playerid, -1, "U¿ycie: /l [tekst]");
+	if (isnull(params)) return CMDInfo(playerid, "U¿ycie: /l [tekst]");
 	
 	Chat(playerid, ChatICAdditions(playerid, params));
     return 1;
@@ -321,9 +321,9 @@ YCMD:l(playerid, params[], help)
 
 YCMD:k(playerid, params[], help)
 { //krzyk
-    if ( help ) return SendClientMessage(playerid, -1, "[POMOC] Podstawowy czat IC (krzyk postaci).");
+    if ( help ) return CMDHelp(playerid, "Podstawowy czat IC (krzyk postaci).");
 	
-	if (isnull(params)) return SendClientMessage(playerid, -1, "U¿ycie: /k [tekst]");
+	if (isnull(params)) return CMDInfo(playerid, "U¿ycie: /k [tekst]");
 	
 	Krzyk(playerid, ChatICAdditions(playerid, params));
     return 1;
@@ -331,9 +331,9 @@ YCMD:k(playerid, params[], help)
 
 YCMD:s(playerid, params[], help)
 { //szept
-    if ( help ) return SendClientMessage(playerid, -1, "[POMOC] Podstawowy czat IC (szept postaci).");
+    if ( help ) return CMDHelp(playerid, "Podstawowy czat IC (szept postaci).");
 	
-	if (isnull(params)) return SendClientMessage(playerid, -1, "U¿ycie: /s [tekst]");
+	if (isnull(params)) return CMDInfo(playerid, "U¿ycie: /s [tekst]");
 	
 	Szept(playerid, ChatICAdditions(playerid, params));
     return 1;
@@ -341,9 +341,9 @@ YCMD:s(playerid, params[], help)
 
 YCMD:b(playerid, params[], help)
 { //szept
-    if ( help ) return SendClientMessage(playerid, -1, "[POMOC] Podstawowy czat OOC (wiadomoœæ do graczy woko³o).");
+    if ( help ) return CMDHelp(playerid, "Podstawowy czat OOC (wiadomoœæ do graczy woko³o).");
 	
-	if (isnull(params)) return SendClientMessage(playerid, -1, "U¿ycie: /b [tekst]");
+	if (isnull(params)) return CMDInfo(playerid, "U¿ycie: /b [tekst]");
 	
 	ChatOOC(playerid, ChatOOCAdditions(playerid, params));
     return 1;
@@ -351,9 +351,9 @@ YCMD:b(playerid, params[], help)
 
 YCMD:o(playerid, params[], help)
 { //szept
-    if ( help ) return SendClientMessage(playerid, -1, "[POMOC] Globalny czat OOC (widoczny dla wszystkich graczy na serwerze).");
+    if ( help ) return CMDHelp(playerid, "Globalny czat OOC (widoczny dla wszystkich graczy na serwerze).");
 	
-	if (isnull(params)) return SendClientMessage(playerid, -1, "U¿ycie: /o [tekst]");
+	if (isnull(params)) return CMDInfo(playerid, "U¿ycie: /o [tekst]");
 	
 	ChatOOC(playerid, ChatOOCAdditions(playerid, params));
     return 1;
@@ -361,9 +361,9 @@ YCMD:o(playerid, params[], help)
 
 YCMD:me(playerid, params[], help)
 { //ja
-    if ( help ) return SendClientMessage(playerid, -1, "[POMOC] S³u¿y do opisu czynnoœci które wykonuje postaæ.");
+    if ( help ) return CMDHelp(playerid, "S³u¿y do opisu czynnoœci które wykonuje postaæ.");
 	
-	if (isnull(params)) return SendClientMessage(playerid, -1, "U¿ycie: /me [akcja]");
+	if (isnull(params)) return CMDInfo(playerid, "U¿ycie: /me [akcja]");
 	
 	Me(playerid, ZamienZnalezioneBindy(playerid, params));
     return 1;
@@ -371,9 +371,9 @@ YCMD:me(playerid, params[], help)
 
 YCMD:do(playerid, params[], help)
 { //do
-    if ( help ) return SendClientMessage(playerid, -1, "[POMOC] S³u¿y do opisu otoczenia, wygl¹du czy sytuacji w jakiej znalaz³a siê nasza postaæ.");
+    if ( help ) return CMDHelp(playerid, "S³u¿y do opisu otoczenia, wygl¹du czy sytuacji w jakiej znalaz³a siê nasza postaæ.");
 	
-	if (isnull(params)) return SendClientMessage(playerid, -1, "U¿ycie: /do [akcja]");
+	if (isnull(params)) return CMDInfo(playerid, "U¿ycie: /do [akcja]");
 	
 	Do(playerid, ZamienZnalezioneBindy(playerid, params));
     return 1;
@@ -381,9 +381,9 @@ YCMD:do(playerid, params[], help)
 
 YCMD:cb(playerid, params[], help)
 { //chat
-    if ( help ) return SendClientMessage(playerid, -1, "[POMOC] CB radio pozwala siê komunikowaæ z graczami, którzy s¹ w samochodzie z zakupionym CB-radiem.");
+    if ( help ) return CMDHelp(playerid, "CB radio pozwala siê komunikowaæ z graczami, którzy s¹ w samochodzie z zakupionym CB-radiem.");
 	
-	if (isnull(params)) return SendClientMessage(playerid, -1, "U¿ycie: /cb [tekst]");
+	if (isnull(params)) return CMDInfo(playerid, "U¿ycie: /cb [tekst]");
 	
 	CBRadio(playerid, ZamienZnalezioneBindy(playerid, params));
     return 1;
@@ -391,12 +391,12 @@ YCMD:cb(playerid, params[], help)
 
 YCMD:w(playerid, params[], help)
 { //chat
-    if ( help ) return SendClientMessage(playerid, -1, "[POMOC] Wysy³a prywatn¹ wiadomoœæ do drugiego gracza.");
+    if ( help ) return CMDHelp(playerid, "Wysy³a prywatn¹ wiadomoœæ do drugiego gracza.");
 	
 	new string[256], giveplayerid;
 	
-	if(!sscanf(params, "us[256]", giveplayerid, string)) 
-		return SendClientMessage(playerid, -1, "U¿ycie: /w [ID/Nick] [wiadomoœæ]");
+	if(sscanf(params, "us[256]", giveplayerid, string)) 
+		return CMDInfo(playerid, "U¿ycie: /w [ID/Nick] [wiadomoœæ]");
 		
 	PrywatnaWiadomosc(playerid, giveplayerid, ZamienZnalezioneBindy(playerid, string));
     return 1;

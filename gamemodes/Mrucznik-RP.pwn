@@ -189,6 +189,7 @@ forward OnPlayerLogin(playerid);
 	#include "modules\frakcje\HA\HA.pwn"
 #include "modules\organizacje\organizacje.pwn"
 #include "modules\prace\prace.pwn"
+#include "modules\interiory\interiory_gui.pwn"
 #include "modules\interiory\interiory.pwn"
 #include "modules\domy\domy.pwn"
 #include "modules\ekonomia\ekonomia.pwn"
@@ -323,6 +324,7 @@ public OnGameModeInit()
 	pojazdy_Init();
 	ekonomia_Init();
 	keybindy_Init();
+	ustawienia_Init();
 	chaty_Init();
 	print("    >>> Pomyslnie zaladowano wszystkie moduly...");
 	
@@ -770,6 +772,7 @@ public OnPlayerRegister(playerid)
 	
 	ServerInfo(playerid, "Zarejestrowa³eœ siê");
 	Log(LoginLog, INFO, "%s (UID: %d) zarejestrowal sie poprawnie z IP: %s", GetNick(playerid), PlayerInfo[playerid][pUID], GetIp(playerid));
+	HideWelcomeScreenTextdraw(playerid);
 	
 	LoginPlayer(playerid);
 	return 1;
@@ -781,6 +784,10 @@ public OnPlayerLogin(playerid)
 	
 	ServerInfo(playerid, "Zalogowa³eœ siê!");
 	Log(LoginLog, INFO, "%s (UID: %d) zalogowa³ sie poprawnie z IP: %s", GetNick(playerid), PlayerInfo[playerid][pUID], GetIp(playerid));
+	HideWelcomeScreenTextdraw(playerid);
+	
+	//Modules:
+	admin_AssignPlayerToGroup(playerid);
 	
 	LoginPlayer(playerid);
 	return 1;

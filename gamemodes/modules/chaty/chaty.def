@@ -31,7 +31,7 @@
 #define ServerBadInfo(%0,%1) 		MruMessage(%0,COLOR_BINFO,"   "%1)
 #define ServerOferta(%0,%1) 		MruMessage(%0,COLOR_OFERTA," **"%1)
 #define ServerKara(%0,%1) 			MruMessage(%0,COLOR_KARA,"AdmCmd: "%1)
-#define CMDHelp(%0,%1) 				SendClientMessage(%0,COLOR_CMDHELP,%1)
+#define CMDHelp(%0,%1) 				SendClientMessage(%0,COLOR_CMDHELP,"[POMOC] "%1)
 #define CMDInfo(%0,%1) 				SendClientMessage(%0,COLOR_CMDHELP,%1)
 //Wiadomoœci serwerowe za pomoc¹ zmiennej:
 #define ServerErrorV(%0,%1) 		MruMessageF(%0,COLOR_WHITE,"[ERROR] {C00010}%s",%1)

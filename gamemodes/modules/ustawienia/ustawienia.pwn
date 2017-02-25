@@ -30,6 +30,11 @@
 //
 
 //-----------------<[ Funkcje: ]>-------------------
+ustawienia_Init()
+{
+	ustawienia_LoadCommands();
+}
+
 stock Ustawienia(playerid)
 {
 	inline iSettings(pid, dialogid, response, listitem, string:inputtext[])
@@ -195,6 +200,12 @@ public ustawienia_DoorKeys(playerid)
 }
 //------------------<[ MySQL: ]>--------------------
 //-----------------<[ Komendy: ]>-------------------
+ustawienia_LoadCommands()
+{
+	Command_AddAlt(YCMD:ustawienia, "settings");
+	Group_SetCommand(LoggedPlayers, YCMD:ustawienia, true);
+}
+
 YCMD:ustawienia(playerid, params[], help)
 {
 	if(help) return SendClientMessage(playerid, -1, "Pod t¹ komend¹ mo¿esz modyfikowaæ wszystkie dostêpne ustawienia swojego konta.");

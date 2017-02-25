@@ -78,6 +78,8 @@ enum pInfo
 	
 	//Przywileje:
 	pAdmin,
+	pPolAdmin,
+	pZaufanyGracz,
 	
 	//Przestêpstwa
 	pWL,
